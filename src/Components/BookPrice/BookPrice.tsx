@@ -12,7 +12,7 @@ const BookPrice: FC<PriceProps> = ({ price, size }) => {
   return <p className={classNames(style.price, 
   {[style.big]: size === 'big'}, 
   )}>
-    {`$${price}`}
+    {`${price}`}
   </p>
 }
 

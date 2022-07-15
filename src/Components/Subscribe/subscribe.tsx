@@ -1,4 +1,4 @@
-import React from "react"
+import React, {FC} from "react"
 import classNames from "classnames"
 
 import Input from "../Input"
@@ -7,7 +7,7 @@ import PageTitle from "../PageTitle"
 
 import style from './subscribe.module.sass'
 
-const Subscribe = () => {
+const Subscribe: FC = () => {
 
  const onClick = () => {
   console.log('Subscribe!');
@@ -18,14 +18,17 @@ const Subscribe = () => {
  }
 
  return (
-  <div className={classNames(style.subWrapper, 'wrapper')}>
-   <div className={style.title}><PageTitle size="medium" text="Subscribe to Newsletter"/></div>
-   <p>Be the first to know about new IT books, upcoming releases, exclusive offers and more.</p>
-   <div className={style.form}>
-    <div className={style.input}><Input placeholder='Your email' type='common' onChange={onChange}/></div>
-    <div className={style.button}><Button text={'Subscribe'} type='black' onClick={onClick}/></div>
+  <div className='wrapper'>
+   <div className={style.subWrapper}>
+    <div className={style.title}><PageTitle size="medium" text="Subscribe to Newsletter"/></div>
+    <p>Be the first to know about new IT books, upcoming releases, exclusive offers and more.</p>
+    <div className={style.form}>
+     <div className={style.input}><Input placeholder='Your email' type='common' onChange={onChange}/></div>
+     <div className={style.button}><Button text={'Subscribe'} type='black' onClick={onClick}/></div>
+   </div>
    </div>
   </div>
+
  )
 }
 

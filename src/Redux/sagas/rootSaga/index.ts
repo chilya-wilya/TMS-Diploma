@@ -1,8 +1,9 @@
 import {all} from 'redux-saga/effects'
-import postsWatcher from '../postsSaga'
+import newBooksWatcher from '../newBooksSaga'
 
 function* rootSaga(){
- yield all([postsWatcher()])
+ yield all ([newBooksWatcher()])
+
 }
 
 export default rootSaga

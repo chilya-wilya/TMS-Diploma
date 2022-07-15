@@ -1,16 +1,11 @@
 import { create } from "apisauce";
 
 const API = create({
- baseURL: 'https://studapi.teachmeskills.by/'
+ baseURL: 'https://api.itbook.store/1.0/'
 })
 
-const getAllPostsApi = ({
- search = '',
- limit = 10,
- offset = 0,
- ordering = 'date'
-}) => {
- return API.get('/blog/posts/', {search, limit, offset, ordering})
+const getNewBooksApi = () => {
+ return API.get('/new', {})
 }
-
-export {getAllPostsApi}
+ 
+export {getNewBooksApi}

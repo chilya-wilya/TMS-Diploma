@@ -1,8 +1,9 @@
+import React, {FC} from "react"
 import classNames from "classnames"
 
 import style from './footer.module.sass'
 
-const Footer = () => {
+const Footer: FC = () => {
  return (
   <div className={classNames(style.footer, 'wrapper')}>
    <p>©2022 Bookstore</p>

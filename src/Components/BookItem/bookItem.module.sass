@@ -1,0 +1,24 @@
+@import '../../Assets/styles/mixins.sass'
+
+.item
+ width: 352px
+
+ .bookCover
+  display: flex
+  align-items: center
+  justify-content: center
+  background-color: $blue
+  margin-bottom: 20px
+
+ .bookInfo
+  .title
+   margin-bottom: 30px
+
+  .subtitle
+   +interRegular(16px, $secondary)
+   margin-bottom: 40px
+
+  .ratingPrice
+   display: flex
+   justify-content: space-between
+   align-items: center
