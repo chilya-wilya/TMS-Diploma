@@ -1,0 +1,31 @@
+@import '../../Assets/styles/mixins.sass'
+
+.iconButton 
+  height: 34px
+  width: 34px
+  background-color: $white
+  display: flex
+  align-items: center
+  justify-content: center
+  cursor: pointer
+  transition: 0.3s
+  border: none
+ 
+.black
+  background-color: $primary
+  stroke: $white
+  fill: $primary
+  &:hover 
+    stroke: $light-red
+    
+.white
+  background-color: $white
+  stroke: $primary
+  fill: $primary
+  &:hover 
+    stroke: $light-red
+    fill: $light-red
+
+.active 
+  fill: $light-red
+

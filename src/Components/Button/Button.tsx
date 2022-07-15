@@ -1,16 +1,23 @@
 import React, {FC} from "react"
-import classnames from 'classnames'
+import classNames from 'classnames'
 
-import style from './button.module.css'
+import style from './button.module.sass'
 
 type ButtonProps = {
- title: string;
- className?: string;
- onClick: () => void;
+  text: string;
+  onClick: () => void;
+  type: string;
+  icon?: FC;
+  disabled?: true | false
 }
 
-const Button: FC<ButtonProps> = ({ title, onClick }) => {
- return <button className={style.button} onClick = {onClick}>{title}</button>
+const Button: FC<ButtonProps> = ({ text, onClick, type, disabled }) => {
+  return <button className={classNames(style.button, 
+  {[style.black]: type === 'black'}, 
+  {[style.white]: type === 'white'}, 
+  {[style.disabled]: disabled}, 
+  )} 
+  onClick = {onClick}>{text}</button>
 }
 
 export default Button

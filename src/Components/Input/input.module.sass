@@ -1,0 +1,21 @@
+@import '../../Assets/styles/mixins.sass'
+
+.input 
+  height: 56px
+  width: 100%
+  border: 1px solid $gray
+  +interRegular(16px, $primary)
+  padding: 0 10px
+  &:focus
+    outline: 2px solid $gray
+  &::placeholder
+    color: $secondary
+  
+
+.searchInput
+  background-image: url(../../Assets/icons/Search.svg)
+  background-position: 95% center
+  background-repeat: no-repeat
+
+
+.commonInput
