@@ -5,7 +5,11 @@ const API = create({
 })
 
 const getNewBooksApi = () => {
- return API.get('/new', {})
+ return API.get('/new')
+}
+
+const getBookApi = (isbn13:string) => {
+ return API.get(`/books/${isbn13}`)
 }
  
-export {getNewBooksApi}
+export {getNewBooksApi, getBookApi}

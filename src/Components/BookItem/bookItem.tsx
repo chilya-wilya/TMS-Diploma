@@ -1,4 +1,5 @@
 import React, {FC} from "react";
+import { useNavigate } from "react-router-dom";
 import classNames from "classnames"
 
 import PageTitle from "../PageTitle";
@@ -16,14 +17,15 @@ type BookItemProps = {
  url?: string;
 }
 
-const BookItem: FC<BookItemProps> = ({title, subtitle, img, price, url, isbn13}) => {
+const BookItem: FC<BookItemProps> = ({title, subtitle, img, price, isbn13}) => {
+ const navigate = useNavigate();
  return (
-  <div key = {isbn13} className={classNames(style.item, 'wrapper')}>
+  <div className={classNames(style.item, 'wrapper')}>
    <div className={style.bookCover}>
     <img src={img} alt="book cover" />
    </div>
    <div className={style.bookInfo}>
-    <div className={style.title}>
+    <div className={style.title} onClick={() => navigate(`${isbn13}`)}>
      <PageTitle text={title} size='small'/>
     </div>
     <div className={style.subtitle}>
@@ -31,7 +33,7 @@ const BookItem: FC<BookItemProps> = ({title, subtitle, img, price, url, isbn13})
     </div>
     <div className={style.ratingPrice}>
      <BookPrice price={price}/>
-     <StarRating/>
+     <StarRating initialValue={4}/>
     </div>
    </div>
   </div>

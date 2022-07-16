@@ -3,7 +3,11 @@ import { Rating } from 'react-simple-star-rating'
 
 import style from './starRating.module.sass'
 
-const StarRating: FC = () => {
+type StarRatingProps = {
+  initialValue: number
+}
+
+const StarRating: FC<StarRatingProps> = ({initialValue}) => {
   const [rating, setRating] = useState(0) 
 
   // Catch Rating value
@@ -16,7 +20,7 @@ const StarRating: FC = () => {
     <Rating 
     onClick={handleRating} 
     ratingValue={rating} 
-    initialValue={4}
+    initialValue={initialValue}
     size={16}
     fillColor={'#4C4B5E'}
     transition={true}

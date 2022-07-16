@@ -26,7 +26,7 @@ const NewReleasesPage: FC = () => {
     <PageTitle text="New Releases Books" size="big"/>
    </div>
    <div className={classNames(style.booksWrapper, 'wrapper')}>
-    {newBooksList.map((book) => {
+    {newBooksList.map((book, id) => {
      return (
       <BookItem
       title = {book.title}
@@ -35,6 +35,7 @@ const NewReleasesPage: FC = () => {
       price = {book.price}
       img = {book.image}
       url = {book.url}
+      key = {`${id}${book.isbn13}`}
       />
      )
     })}

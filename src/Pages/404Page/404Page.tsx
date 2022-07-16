@@ -41,7 +41,8 @@ const MockComp = () => {
   isbn13 = "9781484206485"
   price = "$32.04"
   img = "https://itbook.store/img/books/9781484206485.png"
-  url = "https://itbook.store/books/9781484206485"/>
+  url = "https://itbook.store/books/9781484206485"
+  />
  </div>
 }
 

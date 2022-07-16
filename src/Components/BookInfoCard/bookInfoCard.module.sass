@@ -1,0 +1,39 @@
+@import '../../Assets/styles/mixins.sass'
+
+.infoRow
+ display: flex
+ gap: 128px
+
+ .imageWrapper
+  min-width: 544px
+  height: 472px
+  background-color: $orange
+  display: flex
+  align-items: center
+  justify-content: center
+  position: relative
+ 
+ .fav
+  padding: 10px
+  background-color: $primary
+  position: absolute
+  left: calc(46% + 4px)
+
+ .info
+  .priceRating
+   display: flex
+   justify-content: space-between
+   align-items: center
+   margin-bottom: 35px
+
+  .list
+   margin-bottom: 50px 
+
+  .button
+   margin-bottom: 40px 
+
+  .link
+   text-align: center
+   > a
+    +interRegular(16px, $primary)
+    text-decoration: none

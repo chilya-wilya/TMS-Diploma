@@ -1,5 +1,5 @@
 import {all} from 'redux-saga/effects'
-import newBooksWatcher from '../newBooksSaga'
+import newBooksWatcher from '../bookSaga'
 
 function* rootSaga(){
  yield all ([newBooksWatcher()])

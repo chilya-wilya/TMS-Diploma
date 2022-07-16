@@ -1,0 +1,20 @@
+@import '../../Assets/styles/mixins.sass'
+
+.listWrapper
+ width: 100%
+ min-width: 445px
+
+ .row
+  display: flex
+  justify-content: space-between
+  margin-bottom: 15px
+
+  .label
+   +interRegular(16px, $secondary)
+
+  .value
+   +interRegular(16px, $primary)
+   width: 65%
+   text-align: right
+  
+   
