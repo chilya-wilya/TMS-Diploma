@@ -1,0 +1,34 @@
+@import '../../Assets/styles/mixins.sass'
+
+.card 
+ display: flex
+ align-items: center
+ gap: 30px
+ border-bottom: 1px solid $gray
+ 
+ .bookCover
+  display: flex
+  align-items: center
+  justify-content: center
+  background-color: $blue
+  margin-bottom: 20px
+
+ .bookInfo
+  display: flex
+  flex-grow: 1
+  flex-direction: column
+  gap: 35px
+
+  .title
+    cursor: pointer
+
+  .authors
+   +interRegular(16px, $secondary)
+
+  .ratingPrice
+   display: flex
+   justify-content: space-between
+
+ .fav
+  margin-left: auto
+  align-self: center
