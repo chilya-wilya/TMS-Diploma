@@ -9,6 +9,7 @@
 
  .logo
   margin-right: 151px
+  cursor: pointer
 
  .search
   width: 542px
@@ -17,3 +18,17 @@
  .navLinks
   display: flex
   gap: 30px
+
+  .link
+   position: relative
+
+  .linkActive
+   &::after
+    position: absolute
+    content: ''
+    min-width: 8px
+    min-height: 8px
+    border-radius: 50%
+    background-color: $light-red
+    top: 4px
+    right: 4px

@@ -1,0 +1,24 @@
+@import '../../Assets/styles/mixins.sass'
+
+.tabSwitcher
+ width: 100%
+ display: flex
+ gap: 40px
+ align-items: center
+ user-select: none
+ background-color: $white
+ padding-right: 620px 
+ border-bottom: 1px solid $gray
+
+ .tab
+  cursor: pointer
+  padding: 0 40px 24px
+  transition: all ease 80ms
+  +interRegular(16px, $secondary)
+
+  &:last-child
+   margin-right: 0
+
+ .active
+  +interSemiBold(16px, $primary)
+  border-bottom: 2px solid $primary
