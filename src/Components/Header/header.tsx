@@ -1,20 +1,24 @@
 import React, { FC } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
 import IconButton from "../IconButton";
 import Input from "../Input";
 import { ReactComponent as Logo } from "../../Assets/icons/logo.svg";
 
+import {
+  setSearchString,
+  SearchedBooksSelector,
+  getSearchedBooks,
+} from "../../Redux/reducers/books";
+
 import style from "./header.module.sass";
 
 const Header: FC = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-
-  const onChange = (val: string) => {
-    console.log(val);
-  };
 
   const navToHome = () => {
     navigate("/books");
@@ -22,8 +26,10 @@ const Header: FC = () => {
   const navToFav = () => {
     navigate("/favorites");
   };
-  const navToSearch = () => {
+  const onChange = (val: string) => {
     navigate("/search");
+    dispatch(setSearchString(val));
+    dispatch(getSearchedBooks(val));
   };
   const navToAcc = () => {
     navigate("/account");

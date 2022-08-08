@@ -1,0 +1,20 @@
+@import '../../Assets/styles/mixins.sass'
+
+.errorContainer
+ min-width: 100vw
+ min-height: 100vh
+ display: flex
+ flex-direction: column
+ align-items: center
+ justify-content: center
+ gap: 30px
+
+ .errorNumber
+  +BebasNeueH1(20vw, $primary)
+  margin-bottom: 110px
+ .errorTitle
+  +BebasNeueH3(5vw, $primary)
+ .errorSubtitle
+  cursor: pointer
+  text-decoration: underline
+  +BebasNeueS1(20px, $primary)

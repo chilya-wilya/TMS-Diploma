@@ -46,19 +46,25 @@ const FavoritesBooksPage: FC = () => {
           <PageTitle text="Favorites" size="big" />
         </div>
         <div className={style.favBooks}>
-          {favBooks.map((book, id) => {
-            return (
-              <div className={style.favCard}>
-                <FavBookCard
-                  title={book.title}
-                  authors={book.authors}
-                  img={book.image}
-                  price={book.price}
-                  key={`${id}*${book.isbn13}`}
-                />
-              </div>
-            );
-          })}
+          {favBooks.length > 0 ? (
+            favBooks.map((book, id) => {
+              return (
+                <div className={style.favCard}>
+                  <FavBookCard
+                    title={book.title}
+                    authors={book.authors}
+                    img={book.image}
+                    price={book.price}
+                    key={`${id}*${book.isbn13}`}
+                  />
+                </div>
+              );
+            })
+          ) : (
+            <div className={style.noFavsMessage}>
+              You have no favorites books yet.
+            </div>
+          )}
         </div>
       </div>
       <div className={style.popularBooks}>

@@ -7,6 +7,9 @@ type InitialStateType = {
   favoritesBooks: any[];
   isNewBooksLoading: boolean;
   isBookInfoLoading: boolean;
+  isSearchedBooksLoading: boolean;
+  searchString: string;
+  searchedBooks: any[];
 };
 
 const initialState: InitialStateType = {
@@ -15,6 +18,9 @@ const initialState: InitialStateType = {
   favoritesBooks: [],
   isNewBooksLoading: false,
   isBookInfoLoading: false,
+  isSearchedBooksLoading: false,
+  searchString: "",
+  searchedBooks: [],
 };
 
 const booksSlice = createSlice({
@@ -43,6 +49,16 @@ const booksSlice = createSlice({
         (book) => book.isbn13 !== action.payload
       );
     },
+    setSearchString: (state, action: PayloadAction<any>) => {
+      state.searchString = action.payload;
+    },
+    getSearchedBooks: (state, action: PayloadAction<any>) => {},
+    setSearchedBooks: (state, action: PayloadAction<any>) => {
+      state.searchedBooks = action.payload;
+    },
+    setSearchedBooksLoading: (state, action: PayloadAction<boolean>) => {
+      state.isNewBooksLoading = action.payload;
+    },
   },
 });
 
@@ -55,6 +71,10 @@ export const {
   setBookInfoLoading,
   setBookToFav,
   removeBookFromFav,
+  setSearchString,
+  getSearchedBooks,
+  setSearchedBooks,
+  setSearchedBooksLoading,
 } = booksSlice.actions;
 const reducer = booksSlice.reducer;
 
@@ -70,4 +90,12 @@ export const BookSelector = {
 
 export const FavoritesBooksSelector = {
   getFavBooks: (state: RootState) => state.books.favoritesBooks,
+};
+
+export const SearchStringSelector = {
+  getSearchString: (state: RootState) => state.books.searchString,
+};
+
+export const SearchedBooksSelector = {
+  getSearchedBooks: (state: RootState) => state.books.searchedBooks,
 };
