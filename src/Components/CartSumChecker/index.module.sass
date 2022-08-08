@@ -1,0 +1,22 @@
+@import '../../Assets/styles/mixins.sass'
+
+.sumWrapper 
+ width: 260px
+ .sumRow  
+  display: flex
+  justify-content: space-between
+  margin-bottom: 16px
+  &:last-child
+   margin-bottom: 24px
+  .title
+   +interRegular(16px, $secondary)
+  .value
+   +interRegular(16px, $primary)
+ .sumRowBig  
+  display: flex
+  justify-content: space-between
+  margin-bottom: 24px
+  .titleBig
+   +BebasNeueH2
+  .valueBig
+   +BebasNeueH2

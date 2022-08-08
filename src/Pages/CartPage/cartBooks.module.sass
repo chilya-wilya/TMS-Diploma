@@ -1,0 +1,23 @@
+@import '../../Assets/styles/mixins.sass'
+
+.cartWrapper
+    .back
+        margin-bottom: 40px
+        cursor: pointer
+
+    .books 
+        margin-bottom: 70px
+        .cartBook
+            margin-bottom: 50px
+            &:last-child    
+                margin-bottom: 0
+    .noBooksMessage
+        +interRegular(16px, $primary)
+        display: flex
+        justify-content: center
+        align-items: center
+        height: 300px
+    .sumCheck
+        display: flex
+        justify-content: end
+        margin-bottom: 70px

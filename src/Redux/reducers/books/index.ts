@@ -3,6 +3,7 @@ import {
   FavBookItemProps,
   // BookInfoCardProps,
   SearchedBooksType,
+  CartBookItemProps,
 } from "./../../../Types/index";
 import { RootState } from "./../../store/index";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
@@ -17,6 +18,7 @@ type InitialStateType = {
   searchedBooks: SearchedBooksType;
   searchString: string;
   searchPage: number;
+  cartList: CartBookItemProps[];
 };
 
 const initialState: InitialStateType = {
@@ -29,6 +31,7 @@ const initialState: InitialStateType = {
   searchedBooks: {},
   searchString: "",
   searchPage: 1,
+  cartList: [],
 };
 
 const booksSlice = createSlice({
@@ -71,6 +74,15 @@ const booksSlice = createSlice({
     setSearchPage: (state, action: PayloadAction<number>) => {
       state.searchPage = action.payload;
     },
+    setBookToCart: (state, action: PayloadAction<CartBookItemProps>) => {
+      state.cartList.push(action.payload);
+    },
+    removeBookFromCart: (state, action: PayloadAction<any>) => {
+      //CartBookItemProps
+      state.cartList = state.cartList.filter(
+        (book) => book.isbn13 !== action.payload
+      );
+    },
   },
 });
 
@@ -88,6 +100,8 @@ export const {
   setSearchedBooksLoading,
   setSearchString,
   setSearchPage,
+  setBookToCart,
+  removeBookFromCart,
 } = booksSlice.actions;
 const reducer = booksSlice.reducer;
 
@@ -115,4 +129,8 @@ export const SearchStringSelector = {
 
 export const SearchPageSelector = {
   getSearchPage: (state: RootState) => state.books.searchPage,
+};
+
+export const CartBooksSelector = {
+  getCartBooks: (state: RootState) => state.books.cartList,
 };

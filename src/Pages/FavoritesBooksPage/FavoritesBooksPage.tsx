@@ -53,6 +53,7 @@ const FavoritesBooksPage: FC = () => {
                     authors={book.authors}
                     image={book.image}
                     price={book.price}
+                    isbn13={book.isbn13}
                     key={`${id}*${book.isbn13}`}
                   />
                 </div>

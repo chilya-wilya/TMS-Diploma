@@ -15,6 +15,14 @@ export type FavBookItemProps = {
   isbn13?: string;
 };
 
+export type CartBookItemProps = {
+  title: string;
+  authors: string;
+  image: string;
+  price: string;
+  isbn13?: string;
+};
+
 export type BookInfoCardProps = {
   title: string;
   subtitle?: string;

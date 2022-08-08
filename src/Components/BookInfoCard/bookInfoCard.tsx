@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 import { BookInfoCardProps } from "../../Types";
 
@@ -8,8 +8,16 @@ import BookPrice from "../BookPrice";
 import InfoList from "../InfoList";
 import Button from "../Button";
 import IconButton from "../IconButton";
+import ModalWindow from "../ModalWindow";
+
+import {
+  setBookToCart,
+  BookSelector,
+  CartBooksSelector,
+} from "../../Redux/reducers/books";
 
 import style from "./bookInfoCard.module.sass";
+import { useDispatch, useSelector } from "react-redux";
 
 const BookInfoCard: FC<BookInfoCardProps> = ({
   title,
@@ -27,8 +35,27 @@ const BookInfoCard: FC<BookInfoCardProps> = ({
   addToFav,
   favIconType,
 }) => {
-  const onClick = () => {
-    console.log("Add to cart");
+  const dispatch = useDispatch();
+
+  const currentBook = useSelector(BookSelector.getBookInfo);
+  const CartList = useSelector(CartBooksSelector.getCartBooks);
+
+  const isBookInCart = !!CartList.find(
+    (book) => book.isbn13 === currentBook.isbn13
+  );
+
+  const [isShowModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
+  const modalClose = () => setShowModal(false);
+
+  const onAddToCart = () => {
+    if (isBookInCart) {
+      setModalMessage("Book is already in your cart!");
+      setShowModal(true);
+    } else {
+      dispatch(setBookToCart(currentBook));
+    }
   };
 
   let link: any;
@@ -44,11 +71,7 @@ const BookInfoCard: FC<BookInfoCardProps> = ({
           <img src={image} alt="book cover" />
         </div>
         <div className={style.fav}>
-          <IconButton
-            type={favIconType}
-            color="black"
-            onClick={() => addToFav()}
-          />
+          <IconButton type={favIconType} color="black" onClick={addToFav} />
         </div>
         <div className={style.info}>
           <div className={style.priceRating}>
@@ -64,7 +87,7 @@ const BookInfoCard: FC<BookInfoCardProps> = ({
             />
           </div>
           <div className={style.button}>
-            <Button text="add to cart" type="black" onClick={onClick} />
+            <Button text="add to cart" type="black" onClick={onAddToCart} />
           </div>
           {pdf && (
             <div className={style.link}>
@@ -75,6 +98,11 @@ const BookInfoCard: FC<BookInfoCardProps> = ({
           )}
         </div>
       </div>
+      <ModalWindow
+        isShown={isShowModal}
+        modalText={modalMessage}
+        modalClose={modalClose}
+      />
     </div>
   );
 };

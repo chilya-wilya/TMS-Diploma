@@ -4,6 +4,7 @@ import HomePage from "../../Components/HomePage";
 import NewReleasesPage from "../NewReleasesPage";
 import BookInfoPage from "../BookInfoPage";
 import FavoritesBooksPage from "../FavoritesBooksPage";
+import CartPage from "../CartPage";
 import SearchPage from "../SearchPage";
 import Page404 from "../404Page/404Page";
 
@@ -30,7 +31,7 @@ const Router = () => {
           <Route path={Pages.Books} element={<NewReleasesPage />} />
           <Route path={Pages.SelectedBook} element={<BookInfoPage />} />
           <Route path={Pages.Favorites} element={<FavoritesBooksPage />} />
-          <Route path={Pages.Cart} element={<MockComp />} />
+          <Route path={Pages.Cart} element={<CartPage />} />
           <Route path={Pages.UserAccount} element={<MockComp />} />
           <Route path={Pages.SearchPage} element={<SearchPage />} />
           <Route path={Pages.Login} element={<MockComp />} />
