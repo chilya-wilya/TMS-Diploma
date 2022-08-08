@@ -1,5 +1,4 @@
 import React, { FC, useState } from "react";
-import classNames from "classnames";
 
 import Input from "../Input";
 import Button from "../Button";

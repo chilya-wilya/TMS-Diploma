@@ -1,0 +1,26 @@
+@import '../../Assets/styles/mixins.sass'
+
+.searchCards
+ display: grid
+ grid-template-columns: repeat(3,1fr)
+ grid-template-rows: max-content
+ row-gap: 50px
+ column-gap: 30px
+ padding-bottom: 70px
+ border-bottom: 1px solid $gray
+
+ > div:nth-child(odd) > div:first-child
+  background-color: $purple
+
+ > div:nth-child(5n) > div:first-child
+  background-color: $green
+
+ > div:nth-child(4n) > div:first-child
+  background-color: $orange
+
+ .noResMessage
+  +interRegular(16px, $primary)
+  height: 250px
+  display: flex
+  align-items: center
+  justify-content: center

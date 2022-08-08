@@ -13,6 +13,8 @@ import {
 } from "../../reducers/books";
 import { getNewBooksApi, getBookApi, getSearchedBooksApi } from "../../api";
 
+type SearchType = [query: string, page: string];
+
 function* getNewBooksSaga() {
   yield put(setNewBooksLoading(true));
   const { data, status, problem } = yield call(getNewBooksApi);
@@ -35,14 +37,14 @@ function* getBookSaga(action: PayloadAction<string>) {
   yield put(setBookInfoLoading(false));
 }
 
-function* getSearchedBooksSaga(action: PayloadAction<string>) {
+function* getSearchedBooksSaga(action: PayloadAction<SearchType>) {
   yield put(setSearchedBooksLoading(true));
   const { data, status, problem } = yield call(
     getSearchedBooksApi,
-    action.payload
+    ...action.payload
   );
   if (status === 200 && data) {
-    yield put(setSearchedBooks(data.books));
+    yield put(setSearchedBooks(data));
   } else {
     console.log("ERROR FETCHING SEARCHED BOOKS", problem);
   }

@@ -1,7 +1,7 @@
 import React, { useEffect, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import classNames from "classnames";
+
+import { scrollToTop } from "../../Utils";
 
 import {
   getReleasedBooks,
@@ -19,6 +19,7 @@ const NewReleasesPage: FC = () => {
 
   useEffect(() => {
     dispatch(getReleasedBooks());
+    scrollToTop();
   }, []);
 
   return (
@@ -32,7 +33,7 @@ const NewReleasesPage: FC = () => {
               subtitle={book.subtitle}
               isbn13={book.isbn13}
               price={book.price}
-              img={book.image}
+              image={book.image}
               url={book.url}
               key={`${id}${book.isbn13}`}
             />

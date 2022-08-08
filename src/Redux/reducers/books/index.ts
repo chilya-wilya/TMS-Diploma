@@ -1,15 +1,21 @@
+import {
+  BookItemProps,
+  FavBookItemProps,
+  // BookInfoCardProps,
+  SearchedBooksType,
+} from "./../../../Types/index";
 import { RootState } from "./../../store/index";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type InitialStateType = {
-  newBooksList: any[];
-  bookInfo: any;
-  favoritesBooks: any[];
+  newBooksList: BookItemProps[];
+  bookInfo: any; //BookInfoCardProps
+  favoritesBooks: FavBookItemProps[];
   isNewBooksLoading: boolean;
   isBookInfoLoading: boolean;
   isSearchedBooksLoading: boolean;
+  searchedBooks: SearchedBooksType;
   searchString: string;
-  searchedBooks: any[];
 };
 
 const initialState: InitialStateType = {
@@ -19,8 +25,8 @@ const initialState: InitialStateType = {
   isNewBooksLoading: false,
   isBookInfoLoading: false,
   isSearchedBooksLoading: false,
+  searchedBooks: {},
   searchString: "",
-  searchedBooks: [],
 };
 
 const booksSlice = createSlice({
@@ -31,7 +37,7 @@ const booksSlice = createSlice({
     setNewBooksLoading: (state, action: PayloadAction<boolean>) => {
       state.isNewBooksLoading = action.payload;
     },
-    setReleasedBooks: (state, action: PayloadAction<any[]>) => {
+    setReleasedBooks: (state, action: PayloadAction<BookItemProps[]>) => {
       state.newBooksList = action.payload;
     },
     getBookInfo: (state, action: PayloadAction<any>) => {},
@@ -41,23 +47,24 @@ const booksSlice = createSlice({
     setBookInfo: (state, action: PayloadAction<any>) => {
       state.bookInfo = action.payload;
     },
-    setBookToFav: (state, action: PayloadAction<any>) => {
+    setBookToFav: (state, action: PayloadAction<FavBookItemProps>) => {
       state.favoritesBooks.push(action.payload);
     },
     removeBookFromFav: (state, action: PayloadAction<any>) => {
+      //FavBookItemProps
       state.favoritesBooks = state.favoritesBooks.filter(
         (book) => book.isbn13 !== action.payload
       );
     },
-    setSearchString: (state, action: PayloadAction<any>) => {
-      state.searchString = action.payload;
-    },
     getSearchedBooks: (state, action: PayloadAction<any>) => {},
-    setSearchedBooks: (state, action: PayloadAction<any>) => {
+    setSearchedBooks: (state, action: PayloadAction<SearchedBooksType>) => {
       state.searchedBooks = action.payload;
     },
     setSearchedBooksLoading: (state, action: PayloadAction<boolean>) => {
       state.isNewBooksLoading = action.payload;
+    },
+    setSearchString: (state, action: PayloadAction<string>) => {
+      state.searchString = action.payload;
     },
   },
 });
@@ -71,10 +78,10 @@ export const {
   setBookInfoLoading,
   setBookToFav,
   removeBookFromFav,
-  setSearchString,
   getSearchedBooks,
   setSearchedBooks,
   setSearchedBooksLoading,
+  setSearchString,
 } = booksSlice.actions;
 const reducer = booksSlice.reducer;
 
@@ -92,10 +99,10 @@ export const FavoritesBooksSelector = {
   getFavBooks: (state: RootState) => state.books.favoritesBooks,
 };
 
-export const SearchStringSelector = {
-  getSearchString: (state: RootState) => state.books.searchString,
-};
-
 export const SearchedBooksSelector = {
   getSearchedBooks: (state: RootState) => state.books.searchedBooks,
+};
+
+export const SearchStringSelector = {
+  getSearchString: (state: RootState) => state.books.searchString,
 };

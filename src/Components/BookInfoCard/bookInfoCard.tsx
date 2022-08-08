@@ -1,5 +1,7 @@
 import React, { FC } from "react";
 
+import { BookInfoCardProps } from "../../Types";
+
 import PageTitle from "../PageTitle";
 import StarRating from "../StarRating";
 import BookPrice from "../BookPrice";
@@ -8,24 +10,6 @@ import Button from "../Button";
 import IconButton from "../IconButton";
 
 import style from "./bookInfoCard.module.sass";
-
-type BookInfoCardProps = {
-  title: string;
-  subtitle?: string;
-  authors: string;
-  publisher: string;
-  pages: string;
-  year: string;
-  rating: string;
-  desc: string;
-  price: string;
-  img: string;
-  pdf?: any;
-  isbn13?: string;
-  url?: string;
-  addToFav: () => void;
-  favIconType: string;
-};
 
 const BookInfoCard: FC<BookInfoCardProps> = ({
   title,
@@ -36,7 +20,7 @@ const BookInfoCard: FC<BookInfoCardProps> = ({
   year,
   rating,
   price,
-  img,
+  image,
   pdf,
   isbn13,
   url,
@@ -57,7 +41,7 @@ const BookInfoCard: FC<BookInfoCardProps> = ({
       <PageTitle text={title} size="big" />
       <div className={style.infoRow}>
         <div className={style.imageWrapper}>
-          <img src={img} alt="book cover" />
+          <img src={image} alt="book cover" />
         </div>
         <div className={style.fav}>
           <IconButton

@@ -1,17 +1,13 @@
 import React, { FC } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import classNames from "classnames";
 
 import IconButton from "../IconButton";
 import Input from "../Input";
 import { ReactComponent as Logo } from "../../Assets/icons/logo.svg";
 
-import {
-  setSearchString,
-  SearchedBooksSelector,
-  getSearchedBooks,
-} from "../../Redux/reducers/books";
+import { getSearchedBooks, setSearchString } from "../../Redux/reducers/books";
 
 import style from "./header.module.sass";
 
@@ -26,16 +22,21 @@ const Header: FC = () => {
   const navToFav = () => {
     navigate("/favorites");
   };
-  const onChange = (val: string) => {
-    navigate("/search");
-    dispatch(setSearchString(val));
-    dispatch(getSearchedBooks(val));
-  };
   const navToAcc = () => {
     navigate("/account");
   };
   const navToCart = () => {
     navigate("/cart");
+  };
+
+  const onChange = (val: string) => {
+    if (val.length !== 0) {
+      navigate("/search");
+      dispatch(setSearchString(val));
+      dispatch(getSearchedBooks(val));
+    } else {
+      navToHome();
+    }
   };
 
   const isFavPage = location.pathname === "/favorites";

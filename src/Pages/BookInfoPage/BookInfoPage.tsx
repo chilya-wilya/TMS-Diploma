@@ -1,8 +1,9 @@
 import React, { useEffect, FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import classNames from "classnames";
 import Slider from "react-slick";
+
+import { scrollToTop } from "../../Utils";
 
 import { ReactComponent as BackButton } from "../../Assets/icons/BackArrow.svg";
 import { ReactComponent as BackArrow } from "../../Assets/icons/ArrowToLeft.svg";
@@ -38,7 +39,7 @@ const BookInfoPage: FC = () => {
 
   useEffect(() => {
     dispatch(getBookInfo(isbn13));
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    scrollToTop();
   }, [isbn13]);
 
   useEffect(() => {
@@ -81,7 +82,7 @@ const BookInfoPage: FC = () => {
           rating={BookInfo.rating}
           desc={BookInfo.desc}
           price={BookInfo.price}
-          img={BookInfo.image}
+          image={BookInfo.image}
           pdf={BookInfo.pdf}
           isbn13={BookInfo.isbn13}
           url={BookInfo.url}
@@ -121,7 +122,7 @@ const BookInfoPage: FC = () => {
                 subtitle={book.subtitle}
                 isbn13={book.isbn13}
                 price={book.price}
-                img={book.image}
+                image={book.image}
                 url={book.url}
                 key={`${id}${book.isbn13}`}
               />

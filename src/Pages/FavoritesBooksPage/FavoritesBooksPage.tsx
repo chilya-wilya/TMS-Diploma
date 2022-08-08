@@ -1,7 +1,6 @@
-import React, { useEffect, FC, useState } from "react";
+import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 
 import { ReactComponent as BackButton } from "../../Assets/icons/BackArrow.svg";
@@ -14,7 +13,6 @@ import FavBookCard from "../../Components/FavBookCard";
 
 import {
   FavoritesBooksSelector,
-  getReleasedBooks,
   NewBooksSelectors,
 } from "../../Redux/reducers/books";
 
@@ -53,7 +51,7 @@ const FavoritesBooksPage: FC = () => {
                   <FavBookCard
                     title={book.title}
                     authors={book.authors}
-                    img={book.image}
+                    image={book.image}
                     price={book.price}
                     key={`${id}*${book.isbn13}`}
                   />
@@ -79,7 +77,7 @@ const FavoritesBooksPage: FC = () => {
                 subtitle={book.subtitle}
                 isbn13={book.isbn13}
                 price={book.price}
-                img={book.image}
+                image={book.image}
                 url={book.url}
                 key={`${id}${book.isbn13}`}
               />

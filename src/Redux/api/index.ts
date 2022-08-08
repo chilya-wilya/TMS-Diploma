@@ -12,8 +12,8 @@ const getBookApi = (isbn13: string) => {
   return API.get(`/books/${isbn13}`);
 };
 
-const getSearchedBooksApi = (query: string) => {
-  return API.get(`/search/${query}`);
+const getSearchedBooksApi = (query: string, page: string) => {
+  return API.get(`/search/${query}/${page}`);
 };
 
 export { getNewBooksApi, getBookApi, getSearchedBooksApi };

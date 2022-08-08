@@ -2,25 +2,18 @@ import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 
+import { BookItemProps } from "../../Types";
+
 import PageTitle from "../PageTitle";
 import StarRating from "../StarRating";
 import BookPrice from "../BookPrice";
 
 import style from "./bookItem.module.sass";
 
-type BookItemProps = {
-  title: string;
-  subtitle: string;
-  img: string;
-  price: string;
-  isbn13?: string;
-  url?: string;
-};
-
 const BookItem: FC<BookItemProps> = ({
   title,
   subtitle,
-  img,
+  image,
   price,
   isbn13,
 }) => {
@@ -28,7 +21,7 @@ const BookItem: FC<BookItemProps> = ({
   return (
     <div className={classNames(style.item, "wrapper")}>
       <div className={style.bookCover}>
-        <img src={img} alt="book cover" />
+        <img src={image} alt="book cover" />
       </div>
       <div className={style.bookInfo}>
         <div
