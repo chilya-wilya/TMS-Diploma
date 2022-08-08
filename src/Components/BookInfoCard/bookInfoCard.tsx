@@ -54,6 +54,8 @@ const BookInfoCard: FC<BookInfoCardProps> = ({
       setModalMessage("Book is already in your cart!");
       setShowModal(true);
     } else {
+      setModalMessage("Book added in your cart");
+      setShowModal(true);
       dispatch(setBookToCart(currentBook));
     }
   };
