@@ -1,0 +1,39 @@
+@import '../../Assets/styles/mixins.sass'
+
+.accountWrapper
+ padding-bottom: 72px
+ margin-bottom: 50px
+ border-bottom: 1px solid $gray
+ .back
+  margin-bottom: 35px
+  cursor: pointer
+ .subtitle
+  margin-bottom: 16px
+ .profile
+  display: flex
+  justify-content: space-between
+  margin-bottom: 50px
+  .inputRow
+   width: 544px
+   .value
+    +interBold(16px, $primary)
+    margin-bottom: 10px
+ .password
+  display: flex
+  justify-content: space-between
+  .passRowSec
+   align-self: end
+  .passRow
+   width: 544px
+   .passInput
+    margin-bottom: 22px
+   .value
+    +interBold(16px, $primary)
+    margin-bottom: 10px
+
+.buttons
+ width: 530px
+ display: flex
+ gap: 32px
+ margin-left: auto
+ padding-bottom: 72px

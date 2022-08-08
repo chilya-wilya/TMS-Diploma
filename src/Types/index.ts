@@ -54,3 +54,9 @@ export type PagerPropsType = {
   onChange: (arg: number) => void;
   pageNeighbours?: number;
 };
+
+export type UserType = {
+  name: string;
+  email: string;
+  password: string;
+};
