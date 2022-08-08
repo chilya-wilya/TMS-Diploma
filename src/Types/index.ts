@@ -40,8 +40,9 @@ export type SearchedBooksType = {
   total?: string;
 };
 
-export type PaginationPropsType = {
-  totalCount?: string;
-  limit?: number;
-  onClick?: () => void;
+export type PagerPropsType = {
+  page: number;
+  count: number;
+  onChange: (arg: number) => void;
+  pageNeighbours?: number;
 };

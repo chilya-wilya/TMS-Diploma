@@ -4,7 +4,7 @@ import classNames from "classnames";
 import style from "./button.module.sass";
 
 type ButtonProps = {
-  text: string;
+  text: string | number;
   onClick: () => void;
   type: string;
   icon?: FC;

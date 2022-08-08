@@ -16,6 +16,7 @@ type InitialStateType = {
   isSearchedBooksLoading: boolean;
   searchedBooks: SearchedBooksType;
   searchString: string;
+  searchPage: number;
 };
 
 const initialState: InitialStateType = {
@@ -27,6 +28,7 @@ const initialState: InitialStateType = {
   isSearchedBooksLoading: false,
   searchedBooks: {},
   searchString: "",
+  searchPage: 1,
 };
 
 const booksSlice = createSlice({
@@ -66,6 +68,9 @@ const booksSlice = createSlice({
     setSearchString: (state, action: PayloadAction<string>) => {
       state.searchString = action.payload;
     },
+    setSearchPage: (state, action: PayloadAction<number>) => {
+      state.searchPage = action.payload;
+    },
   },
 });
 
@@ -82,6 +87,7 @@ export const {
   setSearchedBooks,
   setSearchedBooksLoading,
   setSearchString,
+  setSearchPage,
 } = booksSlice.actions;
 const reducer = booksSlice.reducer;
 
@@ -105,4 +111,8 @@ export const SearchedBooksSelector = {
 
 export const SearchStringSelector = {
   getSearchString: (state: RootState) => state.books.searchString,
+};
+
+export const SearchPageSelector = {
+  getSearchPage: (state: RootState) => state.books.searchPage,
 };

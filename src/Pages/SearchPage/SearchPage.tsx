@@ -1,24 +1,30 @@
 import { FC } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import BookItem from "../../Components/BookItem";
 import PageTitle from "../../Components/PageTitle";
-import Pagination from "../../Components/Pagination";
+import Pager from "../../Components/Pagination/Pager";
 
 import {
   SearchedBooksSelector,
   SearchStringSelector,
+  SearchPageSelector,
+  setSearchPage,
 } from "../../Redux/reducers/books";
 
 import style from "./searchPage.module.sass";
 
 const SearchPage: FC = () => {
+  const dispatch = useDispatch();
   const searchedBooksList = useSelector(SearchedBooksSelector.getSearchedBooks);
   const searchString = useSelector(SearchStringSelector.getSearchString);
   const limit = searchedBooksList.books?.length;
   const totalCount = searchedBooksList.total;
+  const currentPage = useSelector(SearchPageSelector.getSearchPage);
 
-  console.log(searchedBooksList);
+  const onPagerClick = (page: number) => {
+    dispatch(setSearchPage(page));
+  };
 
   return (
     <div className="wrapper">
@@ -44,7 +50,13 @@ const SearchPage: FC = () => {
           </div>
         )}
       </div>
-      <Pagination totalCount={totalCount} limit={limit} />
+      {totalCount && limit && (
+        <Pager
+          page={currentPage + 1}
+          count={Math.ceil(+totalCount / +limit)}
+          onChange={(page) => onPagerClick(page)}
+        />
+      )}
     </div>
   );
 };

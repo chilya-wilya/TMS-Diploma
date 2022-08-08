@@ -1,13 +1,18 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
 import IconButton from "../IconButton";
 import Input from "../Input";
 import { ReactComponent as Logo } from "../../Assets/icons/logo.svg";
 
-import { getSearchedBooks, setSearchString } from "../../Redux/reducers/books";
+import {
+  getSearchedBooks,
+  setSearchString,
+  SearchPageSelector,
+  setSearchPage,
+} from "../../Redux/reducers/books";
 
 import style from "./header.module.sass";
 
@@ -15,6 +20,8 @@ const Header: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const searchPage = useSelector(SearchPageSelector.getSearchPage);
 
   const navToHome = () => {
     navigate("/books");
@@ -29,15 +36,26 @@ const Header: FC = () => {
     navigate("/cart");
   };
 
+  const [searchStr, setSearchStr] = useState("");
+
   const onChange = (val: string) => {
     if (val.length !== 0) {
       navigate("/search");
+      setSearchStr(val);
       dispatch(setSearchString(val));
-      dispatch(getSearchedBooks(val));
+      dispatch(getSearchedBooks([val, searchPage]));
     } else {
       navToHome();
     }
   };
+
+  useEffect(() => {
+    dispatch(setSearchPage(1));
+  }, [searchStr]);
+
+  useEffect(() => {
+    dispatch(getSearchedBooks([searchStr, searchPage]));
+  }, [searchStr, searchPage]);
 
   const isFavPage = location.pathname === "/favorites";
   const isAccPage = location.pathname === "/account";
