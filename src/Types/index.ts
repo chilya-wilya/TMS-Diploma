@@ -41,6 +41,17 @@ export type BookInfoCardProps = {
   favIconType: string;
 };
 
+export type PageTitleProps = {
+  text: string;
+  size: "big" | "small" | "medium";
+};
+
+export type TabSwitcherProps = {
+  options: { text: string; value: string }[];
+  changeHandler: Function;
+  type: "info" | "auth";
+};
+
 export type SearchedBooksType = {
   books?: Array<BookItemProps>;
   error?: string;
@@ -53,6 +64,10 @@ export type PagerPropsType = {
   count: number;
   onChange: (arg: number) => void;
   pageNeighbours?: number;
+};
+
+export type CartSumCheckerProps = {
+  price: number;
 };
 
 export type UserType = {

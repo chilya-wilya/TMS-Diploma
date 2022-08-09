@@ -28,7 +28,7 @@ const AccountPage: FC = () => {
           </div>
           <div className={styles.inputRow}>
             <p className={styles.value}>Email</p>
-            <Input type="text" onChange={() => {}} placeholder="Your email" />
+            <Input type="email" onChange={() => {}} placeholder="Your email" />
           </div>
         </div>
         <div className={styles.subtitle}>

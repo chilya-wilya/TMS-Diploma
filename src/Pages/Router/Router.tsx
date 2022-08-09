@@ -7,6 +7,8 @@ import FavoritesBooksPage from "../FavoritesBooksPage";
 import CartPage from "../CartPage";
 import SearchPage from "../SearchPage";
 import AccountPage from "../AccountPage";
+import AuthPage from "../AuthPage";
+import ResetPage from "../ResetPage";
 import Page404 from "../404Page/404Page";
 
 import MockComp from "../404Page/404Page";
@@ -35,8 +37,8 @@ const Router = () => {
           <Route path={Pages.Cart} element={<CartPage />} />
           <Route path={Pages.UserAccount} element={<AccountPage />} />
           <Route path={Pages.SearchPage} element={<SearchPage />} />
-          <Route path={Pages.Login} element={<MockComp />} />
-          <Route path={Pages.Reset} element={<MockComp />} />
+          <Route path={Pages.Login} element={<AuthPage />} />
+          <Route path={Pages.Reset} element={<ResetPage />} />
         </Route>
         <Route path={Pages.NotFoundPage} element={<Page404 />} />
       </Routes>

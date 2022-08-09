@@ -19,7 +19,7 @@ const BookCounter: FC<BookCounterProps> = ({
   return (
     <div className={style.counterWrapper}>
       <Minus style={{ cursor: "pointer" }} onClick={onClickMinus} />
-      <p className={style.count}>{count >= 0 ? count : 0}</p>
+      <p className={style.count}>{count}</p>
       <Plus style={{ cursor: "pointer" }} onClick={onClickPlus} />
     </div>
   );

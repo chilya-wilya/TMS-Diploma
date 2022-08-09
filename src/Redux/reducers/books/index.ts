@@ -83,6 +83,9 @@ const booksSlice = createSlice({
         (book) => book.isbn13 !== action.payload
       );
     },
+    removeAllBooksFromCart: (state) => {
+      state.cartList = initialState.cartList;
+    },
   },
 });
 
@@ -102,6 +105,7 @@ export const {
   setSearchPage,
   setBookToCart,
   removeBookFromCart,
+  removeAllBooksFromCart,
 } = booksSlice.actions;
 const reducer = booksSlice.reducer;
 

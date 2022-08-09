@@ -98,6 +98,7 @@ const BookInfoPage: FC = () => {
             { text: "Reviews", value: "reviews" },
           ]}
           changeHandler={(value: string) => setTabSelect(value)}
+          type="info"
         />
       </div>
       <div className={style.infoText}>

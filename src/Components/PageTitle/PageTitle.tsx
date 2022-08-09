@@ -1,19 +1,22 @@
-import React, {FC} from "react"
-import classnames from 'classnames'
+import React, { FC } from "react";
+import classnames from "classnames";
 
-import style from './pageTitle.module.sass'
+import { PageTitleProps } from "../../Types";
 
-type PageTitleProps = {
- text: string;
- size: string;
-}
+import style from "./pageTitle.module.sass";
 
 const PageTitle: FC<PageTitleProps> = ({ text, size }) => {
- return <h1 className={classnames(
-  {[style.big]: size === 'big'}, 
-  {[style.medium]: size === 'medium'}, 
-  {[style.small]: size === 'small'}, 
-  )}>{text}</h1>
-}
+  return (
+    <h1
+      className={classnames(
+        { [style.big]: size === "big" },
+        { [style.medium]: size === "medium" },
+        { [style.small]: size === "small" }
+      )}
+    >
+      {text}
+    </h1>
+  );
+};
 
-export default PageTitle
+export default PageTitle;

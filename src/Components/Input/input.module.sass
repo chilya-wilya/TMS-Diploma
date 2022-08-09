@@ -9,8 +9,8 @@
   &:focus
     outline: 2px solid $gray
   &::placeholder
-    color: $secondary
-  
+    +interRegular(16px, $secondary)
+
 .searchInput
   background-image: url(../../Assets/icons/Search.svg)
   background-position: 95% center
@@ -18,5 +18,3 @@
   transition-duration: 0.4s
   &:focus
     background-position: 115% center
-
-.commonInput

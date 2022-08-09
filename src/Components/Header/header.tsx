@@ -68,7 +68,13 @@ const Header: FC = () => {
           <Logo />
         </div>
         <div className={style.search}>
-          <Input placeholder="Search" type="search" onChange={onChange} />
+          <Input
+            placeholder="Search"
+            withIcon
+            onChange={onChange}
+            type="search"
+            autocomplete="off"
+          />
         </div>
         <div className={style.navLinks}>
           <div

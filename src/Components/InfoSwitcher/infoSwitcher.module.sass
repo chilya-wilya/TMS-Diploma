@@ -1,24 +1,37 @@
 @import '../../Assets/styles/mixins.sass'
 
 .tabSwitcher
- width: 100%
- display: flex
- gap: 40px
- align-items: center
- user-select: none
- background-color: $white
- padding-right: 620px 
- border-bottom: 1px solid $gray
+  width: 100%
+  display: flex
+  gap: 40px
+  align-items: center
+  user-select: none
+  background-color: $white
+  border-bottom: 1px solid $gray
 
- .tab
-  cursor: pointer
-  padding: 0 40px 24px
-  transition: all ease 80ms
-  +interRegular(16px, $secondary)
+  .tab
+    cursor: pointer
+    padding: 0 40px 24px
+    +interRegular(16px, $secondary)
 
-  &:last-child
-   margin-right: 0
+    &:last-child
+    margin-right: 0
 
- .active
-  +interSemiBold(16px, $primary)
-  border-bottom: 2px solid $primary
+  .active
+    +interSemiBold(16px, $primary)
+    border-bottom: 2px solid $primary
+
+  .tabAuth
+    cursor: pointer
+    padding: 0 40px 20px
+    +BebasNeueH3(24px, $secondary)
+    width: 40%
+    display: flex
+    justify-content: center
+
+  .authActive
+    +BebasNeueH3(24px, $primary)
+    border-bottom: 2px solid $primary
+
+.authWrapper
+  justify-content: space-evenly

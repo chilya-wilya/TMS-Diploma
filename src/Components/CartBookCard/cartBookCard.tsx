@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
@@ -36,6 +36,9 @@ const CartBookCard: FC<CartBookItemProps> = ({
   };
 
   const [count, setCount] = useState(1);
+  useEffect(() => {
+    count >= 1 ? setCount(count) : setCount(1);
+  }, [count]);
   return (
     <div className={classNames(style.card, "wrapper")}>
       <div className={style.bookCover}>
@@ -60,7 +63,7 @@ const CartBookCard: FC<CartBookItemProps> = ({
         </div>
       </div>
       <div className={style.price}>
-        <BookPrice price={price} />
+        <BookPrice price={`$ ${+price.substring(1) * count}`} />
       </div>
       <div className={style.delete}>
         <Delete onClick={onDelete} />

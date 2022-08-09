@@ -1,19 +1,19 @@
-import React, {FC} from "react"
-import classNames from 'classnames'
+import React, { FC } from "react";
+import classNames from "classnames";
 
-import style from './price.module.sass'
+import style from "./price.module.sass";
 
 type PriceProps = {
-  price: string;
+  price: string | number;
   size?: string;
-}
+};
 
 const BookPrice: FC<PriceProps> = ({ price, size }) => {
-  return <p className={classNames(style.price, 
-  {[style.big]: size === 'big'}, 
-  )}>
-    {`${price}`}
-  </p>
-}
+  return (
+    <p className={classNames(style.price, { [style.big]: size === "big" })}>
+      {`${price}`}
+    </p>
+  );
+};
 
-export default BookPrice
+export default BookPrice;

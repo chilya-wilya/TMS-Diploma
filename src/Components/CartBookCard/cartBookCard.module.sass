@@ -1,36 +1,35 @@
 @import '../../Assets/styles/mixins.sass'
 
 .card 
- display: flex
- align-items: center
- gap: 30px
- border-bottom: 1px solid $gray
- 
- .bookCover
   display: flex
   align-items: center
-  justify-content: center
-  background-color: $blue
-  margin-bottom: 20px
+  gap: 30px
+  border-bottom: 1px solid $gray
+  
+  .bookCover
+    display: flex
+    align-items: center
+    justify-content: center
+    background-color: $blue
+    margin-bottom: 20px
 
- .bookInfo
-  display: flex
-  flex-grow: 1
-  flex-direction: column
-  gap: 35px
+  .bookInfo
+    display: flex
+    flex-grow: 1
+    flex-direction: column
+    gap: 35px
 
-  .title
-    cursor: pointer
+    .title
+      cursor: pointer
 
-  .authors
-   +interRegular(16px, $secondary)
+    .authors
+      +interRegular(16px, $secondary)
 
   .price
-   display: flex
-   justify-content: space-between
+    min-width: fit-content
 
- .delete
-  cursor: pointer
-  width: 150px
-  display: flex
-  justify-content: end
+  .delete
+    cursor: pointer
+    width: 150px
+    display: flex
+    justify-content: end

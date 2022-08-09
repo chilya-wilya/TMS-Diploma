@@ -1,5 +1,5 @@
-import React, { FC, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as BackButton } from "../../Assets/icons/BackArrow.svg";
@@ -8,19 +8,15 @@ import PageTitle from "../../Components/PageTitle";
 import CartBookCard from "../../Components/CartBookCard";
 import CartSumChecker from "../../Components/CartSumChecker";
 
-import {
-  CartBooksSelector,
-  removeBookFromCart,
-} from "../../Redux/reducers/books";
+import { CartBooksSelector } from "../../Redux/reducers/books";
 
 import style from "./cartBooks.module.sass";
 
 const FavoritesBooksPage: FC = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const cartList = useSelector(CartBooksSelector.getCartBooks);
-  useEffect(() => {}, []);
+
   let sum = 0;
 
   return (

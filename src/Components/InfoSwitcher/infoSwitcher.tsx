@@ -1,45 +1,49 @@
-import React, { FC, useEffect, useState } from 'react';
-import classNames from 'classnames';
+import React, { FC, useEffect, useState } from "react";
+import classNames from "classnames";
 
-import style from './infoSwitcher.module.sass'
+import { TabSwitcherProps } from "../../Types";
 
-type TabSwitcherProps = {
- options: { text: string, value: string }[],
- changeHandler: Function,
-}
+import style from "./infoSwitcher.module.sass";
 
 const TabSwitcher: FC<TabSwitcherProps> = ({
- options,
- changeHandler,
- }) => {
+  options,
+  changeHandler,
+  type,
+}) => {
+  const [current, setCurrent] = useState("");
 
- const [current, setCurrent] = useState('')
+  useEffect(() => {
+    setCurrent(options[0].value);
+  }, []);
 
- useEffect(() => {
-  setCurrent(options[0].value)
- }, [])
+  const clickHandler = (val: any) => {
+    setCurrent(val);
+    changeHandler(val);
+  };
 
- const clickHandler = (val: any) => {
-  setCurrent(val)
-  changeHandler(val)
- }
-
- return (
-  <div className={style.tabSwitcher}>
-   {options.map(elem =>
-   <div
-    key={elem.value}
-    className={classNames(
-     style.tab, 
-     {[style.active]: current === elem.value},
-    )}
-    onClick={() => clickHandler(elem.value)}
+  return (
+    <div
+      className={classNames(
+        style.tabSwitcher,
+        type === "auth" && style.authWrapper
+      )}
     >
-     {elem.text}
+      {options.map((elem) => (
+        <div
+          key={elem.value}
+          className={classNames({
+            [style.tab]: type === "info",
+            [style.active]: type === "info" && current === elem.value,
+            [style.tabAuth]: type === "auth",
+            [style.authActive]: type === "auth" && current === elem.value,
+          })}
+          onClick={() => clickHandler(elem.value)}
+        >
+          {elem.text}
+        </div>
+      ))}
     </div>
-    )}
-  </div>
- )
-}
+  );
+};
 
-export default TabSwitcher
+export default TabSwitcher;
