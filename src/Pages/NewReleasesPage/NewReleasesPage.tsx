@@ -28,24 +28,29 @@ const NewReleasesPage: FC = () => {
 
   return (
     <div className="wrapper">
-      {booksLoading && <LottieLoader animationData={loader} />}
-      <PageTitle text="New Releases Books" size="big" />
-      <div className={style.booksWrapper}>
-        {newBooksList.map((book, id) => {
-          return (
-            <BookItem
-              title={book.title}
-              subtitle={book.subtitle}
-              isbn13={book.isbn13}
-              price={book.price}
-              image={book.image}
-              url={book.url}
-              key={`${id}${book.isbn13}`}
-            />
-          );
-        })}
-      </div>
-      <Subscribe />
+      {booksLoading ? (
+        <LottieLoader animationData={loader} className={style.loader} />
+      ) : (
+        <>
+          <PageTitle text="New Releases Books" size="big" />
+          <div className={style.booksWrapper}>
+            {newBooksList.map((book, id) => {
+              return (
+                <BookItem
+                  title={book.title}
+                  subtitle={book.subtitle}
+                  isbn13={book.isbn13}
+                  price={book.price}
+                  image={book.image}
+                  url={book.url}
+                  key={`${id}${book.isbn13}`}
+                />
+              );
+            })}
+          </div>
+          <Subscribe />
+        </>
+      )}
     </div>
   );
 };
