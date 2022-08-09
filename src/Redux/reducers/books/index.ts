@@ -115,8 +115,16 @@ export const NewBooksSelectors = {
   getReleasedBooks: (state: RootState) => state.books.newBooksList,
 };
 
+export const NewBooksLoadingSelectors = {
+  getNewBooksLoading: (state: RootState) => state.books.isNewBooksLoading,
+};
+
 export const BookSelector = {
   getBookInfo: (state: RootState) => state.books.bookInfo,
+};
+
+export const BookLoadingSelector = {
+  getNewBooksLoading: (state: RootState) => state.books.isBookInfoLoading,
 };
 
 export const FavoritesBooksSelector = {
@@ -125,6 +133,10 @@ export const FavoritesBooksSelector = {
 
 export const SearchedBooksSelector = {
   getSearchedBooks: (state: RootState) => state.books.searchedBooks,
+};
+
+export const SearchedBooksLoadingSelector = {
+  getNewBooksLoading: (state: RootState) => state.books.isSearchedBooksLoading,
 };
 
 export const SearchStringSelector = {

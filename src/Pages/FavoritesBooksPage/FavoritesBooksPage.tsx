@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 
@@ -19,7 +19,6 @@ import {
 import style from "./favoritesBooks.module.sass";
 
 const FavoritesBooksPage: FC = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const newBooksList = useSelector(NewBooksSelectors.getReleasedBooks);

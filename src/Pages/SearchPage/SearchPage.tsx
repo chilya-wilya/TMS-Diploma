@@ -1,21 +1,27 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import LottieLoader from "react-lottie-loader";
 
 import BookItem from "../../Components/BookItem";
 import PageTitle from "../../Components/PageTitle";
 import Pager from "../../Components/Pagination/Pager";
+import loader from "../../Assets/lottieAnimation.json";
 
 import {
   SearchedBooksSelector,
   SearchStringSelector,
   SearchPageSelector,
   setSearchPage,
+  SearchedBooksLoadingSelector,
 } from "../../Redux/reducers/books";
 
 import style from "./searchPage.module.sass";
 
 const SearchPage: FC = () => {
   const dispatch = useDispatch();
+  const booksLoading = useSelector(
+    SearchedBooksLoadingSelector.getNewBooksLoading
+  );
   const searchedBooksList = useSelector(SearchedBooksSelector.getSearchedBooks);
   const searchString = useSelector(SearchStringSelector.getSearchString);
   const limit = searchedBooksList.books?.length;
@@ -28,6 +34,7 @@ const SearchPage: FC = () => {
 
   return (
     <div className="wrapper">
+      {booksLoading && <LottieLoader animationData={loader} />}
       <PageTitle text={`'${searchString}' Search results`} size="big" />
       <div className={style.searchCards}>
         {searchedBooksList.books && searchedBooksList.books.length > 0 ? (

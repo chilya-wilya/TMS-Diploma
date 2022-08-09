@@ -2,6 +2,8 @@ import { FC } from "react";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 
+import { validateEmail } from "../../Utils";
+
 import PageTitle from "../../Components/PageTitle";
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";

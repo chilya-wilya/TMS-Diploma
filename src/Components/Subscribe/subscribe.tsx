@@ -1,5 +1,7 @@
 import React, { FC, useState } from "react";
 
+import { validateEmail } from "../../Utils";
+
 import Input from "../Input";
 import Button from "../Button";
 import PageTitle from "../PageTitle";
@@ -11,8 +13,6 @@ const Subscribe: FC = () => {
   const [email, setEmail] = useState("");
   const [isShowModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-  // prettier-ignore
-  const emailReg = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
   const onChange = (val: string) => {
     setEmail(val);
@@ -21,7 +21,7 @@ const Subscribe: FC = () => {
   const modalClose = () => setShowModal(false);
 
   const onClick = () => {
-    if (email.toLowerCase().match(emailReg)) {
+    if (validateEmail(email)) {
       setModalMessage("You have subscribed on our latest news!");
       setShowModal(true);
     } else {

@@ -25,8 +25,8 @@ const CartSumChecker: FC<CartSumCheckerProps> = ({ price }) => {
   const modalClose = () => setShowModal(false);
 
   const bookPrice = price;
-  const Vat = (bookPrice * 0.19).toFixed(2);
-  const totalPrice = (+bookPrice + +Vat).toFixed(2);
+  const Vat = +(bookPrice * 0.19).toFixed(2);
+  const totalPrice = (bookPrice + Vat).toFixed(2);
 
   const onClick = () => {
     if (cartList.length === 0) {

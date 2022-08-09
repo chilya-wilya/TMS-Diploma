@@ -1,6 +1,7 @@
-import React, { useEffect, FC, useState } from "react";
+import { useEffect, FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import LottieLoader from "react-lottie-loader";
 import Slider from "react-slick";
 
 import { scrollToTop } from "../../Utils";
@@ -13,6 +14,7 @@ import Subscribe from "../../Components/Subscribe";
 import BookInfoCard from "../../Components/BookInfoCard";
 import InfoSwitcher from "../../Components/InfoSwitcher";
 import PageTitle from "../../Components/PageTitle";
+import loader from "../../Assets/lottieAnimation.json";
 
 import {
   getBookInfo,
@@ -20,6 +22,7 @@ import {
   setBookToFav,
   removeBookFromFav,
   FavoritesBooksSelector,
+  BookLoadingSelector,
 } from "../../Redux/reducers/books";
 
 import {
@@ -31,6 +34,7 @@ import BookItem from "../../Components/BookItem";
 import style from "./bookInfoPage.module.sass";
 
 const BookInfoPage: FC = () => {
+  const bookLoading = useSelector(BookLoadingSelector.getNewBooksLoading);
   const [tabSelect, setTabSelect] = useState("description");
 
   const { isbn13 } = useParams();
@@ -69,6 +73,7 @@ const BookInfoPage: FC = () => {
 
   return (
     <div className="wrapper">
+      {bookLoading && <LottieLoader animationData={loader} />}
       <div className={style.bookWrapper}>
         <div className={style.back} onClick={() => navigate(-1)}>
           <BackButton />
