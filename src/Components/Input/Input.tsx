@@ -1,16 +1,11 @@
 import React, { FC } from "react";
 import classNames from "classnames";
 
+import { InputProps } from "../../Types";
+
 import style from "./input.module.sass";
 
-type InputProps = {
-  onChange?: () => void;
-  placeholder?: string;
-  withIcon?: boolean;
-  type?: string;
-};
-
-const Input: FC<any> = ({
+const Input: FC<InputProps> = ({
   onChange,
   withIcon,
   placeholder,
@@ -18,13 +13,12 @@ const Input: FC<any> = ({
   initialValue,
 }) => {
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value); //ошибка при типизировании пропсов
+    onChange(event.target.value);
   };
   return (
     <input
-      style={style}
       className={classNames(style.input, {
-        [style.searchInput]: withIcon === true,
+        [style.searchInput]: withIcon,
       })}
       onChange={onInputChange}
       placeholder={placeholder}

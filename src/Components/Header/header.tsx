@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
@@ -41,7 +41,7 @@ const Header: FC = () => {
   const [searchStr, setSearchStr] = useState("");
 
   const onChange = (val: string) => {
-    if (val.length !== 0) {
+    if (val.length > 0) {
       navigate(Pages.SearchPage);
       setSearchStr(val);
       dispatch(setSearchString(val));
@@ -52,6 +52,10 @@ const Header: FC = () => {
   };
 
   useEffect(() => {
+    if (location.pathname !== Pages.SearchPage) setSearchStr("");
+  }, [location.pathname]);
+
+  useEffect(() => {
     dispatch(setSearchPage(1));
   }, [searchStr]);
 
@@ -59,9 +63,9 @@ const Header: FC = () => {
     dispatch(getSearchedBooks([searchStr, searchPage]));
   }, [searchStr, searchPage]);
 
-  const isFavPage = location.pathname === "/favorites";
-  const isAccPage = location.pathname === "/account";
-  const isCartPage = location.pathname === "/cart";
+  const isFavPage = location.pathname === Pages.Favorites;
+  const isAccPage = location.pathname === Pages.UserAccount;
+  const isCartPage = location.pathname === Pages.Cart;
 
   return (
     <div className="wrapper">
@@ -76,6 +80,7 @@ const Header: FC = () => {
             onChange={onChange}
             type="search"
             autocomplete="off"
+            initialValue={searchStr}
           />
         </div>
         <div className={style.navLinks}>

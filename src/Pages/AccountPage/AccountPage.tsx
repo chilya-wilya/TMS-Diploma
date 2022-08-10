@@ -3,6 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
+import {
+  getAuth,
+  updateProfile,
+  updatePassword,
+  updateEmail,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
+} from "firebase/auth";
+
 import { Pages } from "../Router/Router";
 
 import { validateEmail } from "../../Utils";
@@ -10,6 +19,7 @@ import { validateEmail } from "../../Utils";
 import PageTitle from "../../Components/PageTitle";
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
+import FormMessage from "../../Components/FormMessage/FormMessage";
 import { ReactComponent as BackButton } from "../../Assets/icons/BackArrow.svg";
 
 import {
@@ -23,26 +33,94 @@ import {
 import styles from "./account.module.sass";
 
 const AccountPage: FC = () => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const userEmail = user?.email;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
   const [newName, setNewName] = useState("");
+
+  const [messageType, setMessageType] = useState("");
+  const [isShowMessage, setShowMessage] = useState(false);
+  const [messageText, setMessageText] = useState("");
+
   const { name, email, password } = useSelector(userSelector.getUser);
   const logoutHandler = () => {
     dispatch(removeUser());
     navigate(Pages.Login);
   };
+  // @ts-ignore
+  const credentials = EmailAuthProvider.credential(userEmail, password); //problems with userEmail typing
+  const emailUpdate = () => {
+    if (user) {
+      reauthenticateWithCredential(user, credentials)
+        .then(() => {
+          updateEmail(user, newEmail);
+        })
+        .then(() => {
+          dispatch(changeEmail(newEmail));
+          console.log("email updated!");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+  const nameUpdate = () => {
+    if (user) {
+      updateProfile(user, {
+        displayName: newName,
+      })
+        .then(() => {
+          dispatch(changeName(newName));
+          console.log("name updated!");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+  const passUpdate = () => {
+    if (user) {
+      reauthenticateWithCredential(user, credentials)
+        .then(() => {
+          updatePassword(user, newPassword);
+        })
+        .then(() => {
+          dispatch(changePassword(newPassword));
+          console.log("pass updated!");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
   const saveChangesHandler = () => {
-    if (newPassword && newPassword !== newPasswordConfirm) {
-      console.log("passwords error");
+    if (!newName && !newEmail && !newPassword) {
+      return;
     } else if (newEmail && !validateEmail(newEmail)) {
-      console.log("email error");
+      setMessageType("error");
+      setMessageText("Enter the valid email!");
+      setShowMessage(true);
+    } else if (newPassword.length <= 6) {
+      setMessageType("error");
+      setMessageText("The password has to be at least six characters long!");
+      setShowMessage(true);
+    } else if (newPassword && newPassword !== newPasswordConfirm) {
+      setMessageType("error");
+      setMessageText("Enter the valid password");
+      setShowMessage(true);
     } else {
-      newName && dispatch(changeName(newName));
-      newPassword && dispatch(changePassword(newPassword));
-      newEmail && dispatch(changeEmail(newEmail));
+      !!newName && nameUpdate();
+      !!newPassword && passUpdate();
+      !!newEmail && emailUpdate();
+      setMessageType("OK");
+      setMessageText("Your personal information has been changed!");
+      setShowMessage(true);
     }
   };
   return (
@@ -64,7 +142,7 @@ const AccountPage: FC = () => {
                 setNewName(val);
               }}
               placeholder="Your name"
-              initialValue={name}
+              initialValue={!!newName ? newName : name}
             />
           </div>
           <div className={styles.inputRow}>
@@ -75,7 +153,7 @@ const AccountPage: FC = () => {
                 setNewEmail(val);
               }}
               placeholder="Your email"
-              initialValue={email}
+              initialValue={!!newEmail ? newEmail : email}
             />
           </div>
         </div>
@@ -113,6 +191,15 @@ const AccountPage: FC = () => {
             />
           </div>
         </div>
+        {isShowMessage && (
+          <div style={{ marginTop: "30px" }}>
+            <FormMessage
+              messageType={messageType}
+              messageText={messageText}
+              navLink={Pages.Login}
+            />
+          </div>
+        )}
       </div>
       <div className={classNames(styles.buttons)}>
         <Button text="Save changes" onClick={saveChangesHandler} type="black" />

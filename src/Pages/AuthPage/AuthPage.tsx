@@ -6,6 +6,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 
 import { Pages } from "../Router/Router";
@@ -39,34 +40,38 @@ const AuthPage: FC = () => {
           dispatch(
             setUser({
               email: user.email,
+              name: user.displayName,
               password: passwordSignIn,
             })
           );
           navigate(Pages.Books);
         })
         .catch(console.error);
-      console.log("Sign in!");
+      // console.log("Sign in!");
+      // console.log(user);
     }
   };
   const signUpHandler = () => {
     if (
+      emailSignUp &&
       validateEmail(emailSignUp) &&
-      passwordSignUp === passwordConfirmSignUp
+      passwordSignUp &&
+      passwordSignUp === passwordConfirmSignUp &&
+      nameSignUp
     ) {
       createUserWithEmailAndPassword(auth, emailSignUp, passwordSignUp)
-        .then(({ user }) => {
-          dispatch(
-            setUser({
-              email: user.email,
-              name: nameSignUp,
-              password: passwordSignUp,
-            })
-          );
-          navigate(Pages.Books);
-        })
+        .then((result) =>
+          updateProfile(result.user, {
+            displayName: nameSignUp,
+          })
+        )
         .catch(console.error);
+      // console.log("Sign Up!");
+      // console.log(user);
+      dispatch(setUser({ email: emailSignUp, name: nameSignUp }));
+      navigate(Pages.Books);
     } else {
-      console.log("Passwords doesn't match");
+      console.log("Enter the correct data!");
     }
   };
 

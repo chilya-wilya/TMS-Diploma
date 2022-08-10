@@ -1,16 +1,32 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
+
+import {
+  getAuth,
+  updatePassword,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+} from "firebase/auth";
+
+import { changePassword } from "../../Redux/reducers/user";
 
 import { Pages } from "../Router/Router";
 
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
 import PageTitle from "../../Components/PageTitle";
+import FormMessage from "../../Components/FormMessage/FormMessage";
 
 import style from "./resetPage.module.sass";
 
 const ResetPage: FC = () => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const userEmail = user?.email;
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -18,10 +34,34 @@ const ResetPage: FC = () => {
   const [isShowMessage, setShowMessage] = useState(false);
   const [messageText, setMessageText] = useState("");
 
+  // @ts-ignore
+  const credentials = EmailAuthProvider.credential(userEmail, password);
+
+  const passReset = () => {
+    if (user) {
+      reauthenticateWithCredential(user, credentials)
+        .then(() => {
+          updatePassword(user, password);
+        })
+        .then(() => {
+          dispatch(changePassword(password));
+          console.log("pass updated!");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   const onClick = () => {
-    if (password && passwordConfirm && password === passwordConfirm) {
+    if (password && password.length >= 6 && password === passwordConfirm) {
       setMessageType("OK");
       setMessageText("Your password has been changed!");
+      setShowMessage(true);
+      passReset();
+    } else if (password.length < 6) {
+      setMessageType("error");
+      setMessageText("The password has to be at least six characters long");
       setShowMessage(true);
     } else {
       setMessageType("error");
@@ -29,7 +69,7 @@ const ResetPage: FC = () => {
       setShowMessage(true);
     }
   };
-  console.log(messageType);
+
   return (
     <div className="wrapper" style={{ height: "680px" }}>
       <div className={style.resetWrapper}>
@@ -57,19 +97,12 @@ const ResetPage: FC = () => {
           />
         </div>
         {isShowMessage && (
-          <div
-            className={classNames(style.msg, {
-              [style.errorMsg]: messageType === "error",
-              [style.okMsg]: messageType === "OK",
-            })}
-          >
-            {messageText}
-            {messageType === "OK" && (
-              <div className={style.link} onClick={() => navigate(Pages.Login)}>
-                Back to login
-              </div>
-            )}
-          </div>
+          <FormMessage
+            messageType={messageType}
+            messageText={messageText}
+            navLink={Pages.Login}
+            linkText={"Back to login"}
+          />
         )}
         <div className={style.btn}>
           <Button text={"Set password"} type={"black"} onClick={onClick} />

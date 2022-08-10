@@ -1,3 +1,5 @@
+import { Pages } from "../Pages/Router/Router";
+
 export type BookItemProps = {
   title: string;
   subtitle: string;
@@ -45,6 +47,24 @@ export type BookInfoCardProps = {
 export type PageTitleProps = {
   text: string;
   size: "big" | "small" | "medium";
+};
+
+export type InputProps = {
+  onChange: (val: string) => void;
+  placeholder?: string;
+  withIcon?: boolean;
+  type?: string;
+  value?: string;
+  autocomplete?: "off" | "on";
+  initialValue?: any; //password contains any symbols
+};
+
+export type FormMessageProps = {
+  messageText: string;
+  messageType: string;
+  navLink?: Pages;
+  linkText?: string;
+  width?: any;
 };
 
 export type TabSwitcherProps = {

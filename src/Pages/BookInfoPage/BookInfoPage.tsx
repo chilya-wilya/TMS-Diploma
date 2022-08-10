@@ -73,69 +73,75 @@ const BookInfoPage: FC = () => {
 
   return (
     <div className="wrapper">
-      {bookLoading && <LottieLoader animationData={loader} />}
-      <div className={style.bookWrapper}>
-        <div className={style.back} onClick={() => navigate(-1)}>
-          <BackButton />
-        </div>
-        <BookInfoCard
-          title={BookInfo.title}
-          authors={BookInfo.authors}
-          publisher={BookInfo.publisher}
-          pages={BookInfo.pages}
-          year={BookInfo.year}
-          rating={BookInfo.rating}
-          desc={BookInfo.desc}
-          price={BookInfo.price}
-          image={BookInfo.image}
-          pdf={BookInfo.pdf}
-          isbn13={BookInfo.isbn13}
-          url={BookInfo.url}
-          addToFav={addToFavHandler}
-          favIconType={isBookFav ? "fav" : "addFav"}
-        />
-      </div>
-      <div className={style.switcher}>
-        <InfoSwitcher
-          options={[
-            { text: "Description", value: "description" },
-            { text: "Authors", value: "authors" },
-            { text: "Reviews", value: "reviews" },
-          ]}
-          changeHandler={(value: string) => setTabSelect(value)}
-          type="info"
-        />
-      </div>
-      <div className={style.infoText}>
-        {tabSelect === "description" ? (
-          <p>{BookInfo.desc}</p>
-        ) : tabSelect === "authors" ? (
-          <p>{BookInfo.authors}</p>
-        ) : (
-          <p>There are no reviews yet. You can write the first one!</p>
-        )}
-      </div>
-      <Subscribe />
-      <div className={style.similarBooks}>
-        <div className={style.similarBooksTitle}>
-          <PageTitle text="Similar Books" size="medium" />
-        </div>
-        <Slider {...settings}>
-          {newBooksList.map((book, id) => {
-            return (
-              <BookItem
-                title={book.title}
-                subtitle={book.subtitle}
-                isbn13={book.isbn13}
-                price={book.price}
-                image={book.image}
-                url={book.url}
-                key={`${id}${book.isbn13}`}
-              />
-            );
-          })}
-        </Slider>
-      </div>
+      {/* <LottieLoader animationData={loader} /> */}
+      {bookLoading ? (
+        <LottieLoader animationData={loader} />
+      ) : (
+        <>
+          <div className={style.bookWrapper}>
+            <div className={style.back} onClick={() => navigate(-1)}>
+              <BackButton />
+            </div>
+            <BookInfoCard
+              title={BookInfo.title}
+              authors={BookInfo.authors}
+              publisher={BookInfo.publisher}
+              pages={BookInfo.pages}
+              year={BookInfo.year}
+              rating={BookInfo.rating}
+              desc={BookInfo.desc}
+              price={BookInfo.price}
+              image={BookInfo.image}
+              pdf={BookInfo.pdf}
+              isbn13={BookInfo.isbn13}
+              url={BookInfo.url}
+              addToFav={addToFavHandler}
+              favIconType={isBookFav ? "fav" : "addFav"}
+            />
+          </div>
+          <div className={style.switcher}>
+            <InfoSwitcher
+              options={[
+                { text: "Description", value: "description" },
+                { text: "Authors", value: "authors" },
+                { text: "Reviews", value: "reviews" },
+              ]}
+              changeHandler={(value: string) => setTabSelect(value)}
+              type="info"
+            />
+          </div>
+          <div className={style.infoText}>
+            {tabSelect === "description" ? (
+              <p>{BookInfo.desc}</p>
+            ) : tabSelect === "authors" ? (
+              <p>{BookInfo.authors}</p>
+            ) : (
+              <p>There are no reviews yet. You can write the first one!</p>
+            )}
+          </div>
+          <Subscribe />
+          <div className={style.similarBooks}>
+            <div className={style.similarBooksTitle}>
+              <PageTitle text="Similar Books" size="medium" />
+            </div>
+            <Slider {...settings}>
+              {newBooksList.map((book, id) => {
+                return (
+                  <BookItem
+                    title={book.title}
+                    subtitle={book.subtitle}
+                    isbn13={book.isbn13}
+                    price={book.price}
+                    image={book.image}
+                    url={book.url}
+                    key={`${id}${book.isbn13}`}
+                  />
+                );
+              })}
+            </Slider>
+          </div>
+        </>
+      )}
     </div>
   );
 };

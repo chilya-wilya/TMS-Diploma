@@ -50,7 +50,12 @@ const Router = () => {
               isAuth ? <CartPage /> : <Navigate to={Pages.Login} replace />
             }
           />
-          <Route path={Pages.UserAccount} element={<AccountPage />} />
+          <Route
+            path={Pages.UserAccount}
+            element={
+              isAuth ? <AccountPage /> : <Navigate to={Pages.Login} replace />
+            }
+          />
           <Route path={Pages.SearchPage} element={<SearchPage />} />
           <Route path={Pages.Login} element={<AuthPage />} />
           <Route path={Pages.Reset} element={<ResetPage />} />
