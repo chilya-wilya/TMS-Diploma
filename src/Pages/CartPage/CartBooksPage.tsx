@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +16,10 @@ const FavoritesBooksPage: FC = () => {
   const navigate = useNavigate();
 
   const cartList = useSelector(CartBooksSelector.getCartBooks);
+  const [count, setCount] = useState(1);
+  const getCount = (count: number) => {
+    setCount(count);
+  };
 
   let sum = 0;
 
@@ -31,7 +35,7 @@ const FavoritesBooksPage: FC = () => {
         <div className={style.books}>
           {cartList.length > 0 ? (
             cartList.map((book, id) => {
-              sum = sum + +book.price.substring(1);
+              sum = sum + +book.price.substring(1) * count;
               return (
                 <div className={style.cartBook}>
                   <CartBookCard
@@ -41,6 +45,7 @@ const FavoritesBooksPage: FC = () => {
                     price={book.price}
                     isbn13={book.isbn13}
                     key={`${id}*${book.isbn13}`}
+                    getCount={getCount}
                   />
                 </div>
               );

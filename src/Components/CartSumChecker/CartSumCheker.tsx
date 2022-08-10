@@ -18,7 +18,6 @@ const CartSumChecker: FC<CartSumCheckerProps> = ({ price }) => {
   const dispatch = useDispatch();
 
   const cartList = useSelector(CartBooksSelector.getCartBooks);
-  console.log(cartList);
 
   const [isShowModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");

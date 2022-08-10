@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
+import { Pages } from "../../Pages/Router/Router";
+
 import IconButton from "../IconButton";
 import Input from "../Input";
 import { ReactComponent as Logo } from "../../Assets/icons/logo.svg";
@@ -24,23 +26,23 @@ const Header: FC = () => {
   const searchPage = useSelector(SearchPageSelector.getSearchPage);
 
   const navToHome = () => {
-    navigate("/books");
+    navigate(Pages.Books);
   };
   const navToFav = () => {
-    navigate("/favorites");
+    navigate(Pages.Favorites);
   };
   const navToAcc = () => {
-    navigate("/account");
+    navigate(Pages.UserAccount);
   };
   const navToCart = () => {
-    navigate("/cart");
+    navigate(Pages.Cart);
   };
 
   const [searchStr, setSearchStr] = useState("");
 
   const onChange = (val: string) => {
     if (val.length !== 0) {
-      navigate("/search");
+      navigate(Pages.SearchPage);
       setSearchStr(val);
       dispatch(setSearchString(val));
       dispatch(getSearchedBooks([val, searchPage]));

@@ -24,6 +24,7 @@ const CartBookCard: FC<CartBookItemProps> = ({
   image,
   price,
   isbn13,
+  getCount,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -36,8 +37,10 @@ const CartBookCard: FC<CartBookItemProps> = ({
   };
 
   const [count, setCount] = useState(1);
+
   useEffect(() => {
     count >= 1 ? setCount(count) : setCount(1);
+    getCount(count);
   }, [count]);
   return (
     <div className={classNames(style.card, "wrapper")}>

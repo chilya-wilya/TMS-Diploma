@@ -21,6 +21,7 @@ export type CartBookItemProps = {
   image: string;
   price: string;
   isbn13?: string;
+  getCount: (arg: number) => void;
 };
 
 export type BookInfoCardProps = {
@@ -59,6 +60,11 @@ export type SearchedBooksType = {
   total?: string;
 };
 
+export type PriceProps = {
+  price: string | number;
+  size?: string;
+};
+
 export type PagerPropsType = {
   page: number;
   count: number;
@@ -71,7 +77,7 @@ export type CartSumCheckerProps = {
 };
 
 export type UserType = {
-  name: string;
-  email: string;
-  password: string;
+  name?: null | string;
+  email: null | string;
+  password?: null | string;
 };

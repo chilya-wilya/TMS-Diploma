@@ -10,7 +10,13 @@ type InputProps = {
   type?: string;
 };
 
-const Input: FC<any> = ({ onChange, withIcon, placeholder, type }) => {
+const Input: FC<any> = ({
+  onChange,
+  withIcon,
+  placeholder,
+  type,
+  initialValue,
+}) => {
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value); //ошибка при типизировании пропсов
   };
@@ -23,6 +29,7 @@ const Input: FC<any> = ({ onChange, withIcon, placeholder, type }) => {
       onChange={onInputChange}
       placeholder={placeholder}
       type={type}
+      value={initialValue}
     />
   );
 };

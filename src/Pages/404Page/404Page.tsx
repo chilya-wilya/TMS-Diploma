@@ -1,12 +1,14 @@
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { Pages } from "../Router/Router";
+
 import style from "./index.module.sass";
 
 const Page404: FC = () => {
   const navigate = useNavigate();
   const navToHome = () => {
-    navigate("/books");
+    navigate(Pages.Books);
   };
   return (
     <div className={style.errorContainer}>

@@ -3,23 +3,44 @@ import { RootState } from "./../../store/index";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: UserType = {
-  name: "",
-  email: "",
-  password: "",
+  name: null,
+  email: null,
+  password: null,
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setUser(state, action: PayloadAction<UserType>) {
+      state.name = action.payload.name;
+      state.email = action.payload.email;
+      state.password = action.payload.password;
+    },
+    removeUser(state) {
+      state.name = null;
+      state.email = null;
+      state.password = null;
+    },
+    changeName(state, action: PayloadAction<string>) {
+      state.name = action.payload;
+    },
+    changePassword(state, action: PayloadAction<string>) {
+      state.password = action.payload;
+    },
+    changeEmail(state, action: PayloadAction<string>) {
+      state.email = action.payload;
+    },
+  },
 });
 
-export const {} = userSlice.actions;
+// prettier-ignore
+export const { setUser, removeUser, changeName, changePassword, changeEmail } = userSlice.actions;
 
 const reducer = userSlice.reducer;
 
 export default reducer;
 
-// export const NewBooksSelectors = {
-//  getReleasedBooks: (state: RootState) => state.books.newBooksList,
-// };
+export const userSelector = {
+  getUser: (state: RootState) => state.user,
+};

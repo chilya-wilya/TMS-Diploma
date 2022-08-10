@@ -1,12 +1,9 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import classNames from "classnames";
 
-import style from "./price.module.sass";
+import { PriceProps } from "../../Types";
 
-type PriceProps = {
-  price: string | number;
-  size?: string;
-};
+import style from "./price.module.sass";
 
 const BookPrice: FC<PriceProps> = ({ price, size }) => {
   return (

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import HomePage from "../../Components/HomePage";
 import NewReleasesPage from "../NewReleasesPage";
@@ -10,10 +10,9 @@ import AccountPage from "../AccountPage";
 import AuthPage from "../AuthPage";
 import ResetPage from "../ResetPage";
 import Page404 from "../404Page/404Page";
+import { useAuth } from "../../hooks";
 
-import MockComp from "../404Page/404Page";
-
-export enum Pages { //импортить, чтобы использовать для редиректа на др страницах
+export enum Pages {
   Home = "/",
   Books = "/books",
   SelectedBook = "/books/:isbn13",
@@ -27,14 +26,30 @@ export enum Pages { //импортить, чтобы использовать д
 }
 
 const Router = () => {
+  const { isAuth } = useAuth();
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path={Pages.Home} element={<HomePage />}>
           <Route path={Pages.Books} element={<NewReleasesPage />} />
           <Route path={Pages.SelectedBook} element={<BookInfoPage />} />
-          <Route path={Pages.Favorites} element={<FavoritesBooksPage />} />
-          <Route path={Pages.Cart} element={<CartPage />} />
+          <Route
+            path={Pages.Favorites}
+            element={
+              isAuth ? (
+                <FavoritesBooksPage />
+              ) : (
+                <Navigate to={Pages.Login} replace />
+              )
+            }
+          />
+          <Route
+            path={Pages.Cart}
+            element={
+              isAuth ? <CartPage /> : <Navigate to={Pages.Login} replace />
+            }
+          />
           <Route path={Pages.UserAccount} element={<AccountPage />} />
           <Route path={Pages.SearchPage} element={<SearchPage />} />
           <Route path={Pages.Login} element={<AuthPage />} />

@@ -2,6 +2,8 @@ import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 
+import { Pages } from "../Router/Router";
+
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
 import PageTitle from "../../Components/PageTitle";
@@ -63,7 +65,7 @@ const ResetPage: FC = () => {
           >
             {messageText}
             {messageType === "OK" && (
-              <div className={style.link} onClick={() => navigate("/login")}>
+              <div className={style.link} onClick={() => navigate(Pages.Login)}>
                 Back to login
               </div>
             )}
