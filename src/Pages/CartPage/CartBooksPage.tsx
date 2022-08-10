@@ -4,9 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as BackButton } from "../../Assets/icons/BackArrow.svg";
 
-import PageTitle from "../../Components/PageTitle";
-import CartBookCard from "../../Components/CartBookCard";
-import CartSumChecker from "../../Components/CartSumChecker";
+import { CartBookCard, CartSumChecker, PageTitle } from "../../Components";
 
 import { CartBooksSelector } from "../../Redux/reducers/books";
 

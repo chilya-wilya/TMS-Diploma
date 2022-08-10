@@ -9,7 +9,7 @@ import { ReactComponent as ArrowPrev } from "../../Assets/icons/ArrowToLeft.svg"
 
 import style from "./Pager.module.sass";
 
-const Pager: FC<PagerPropsType> = ({
+const Pagination: FC<PagerPropsType> = ({
   page,
   count = 1,
   onChange,
@@ -106,4 +106,4 @@ const Pager: FC<PagerPropsType> = ({
   );
 };
 
-export default Pager;
+export default Pagination;

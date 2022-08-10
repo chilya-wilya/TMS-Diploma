@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import HomePage from "../../Components/HomePage";
+import HomePage from "../HomePage";
 import NewReleasesPage from "../NewReleasesPage";
 import BookInfoPage from "../BookInfoPage";
 import FavoritesBooksPage from "../FavoritesBooksPage";

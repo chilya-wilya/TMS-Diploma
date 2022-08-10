@@ -7,9 +7,7 @@ import { ReactComponent as BackButton } from "../../Assets/icons/BackArrow.svg";
 import { ReactComponent as BackArrow } from "../../Assets/icons/ArrowToLeft.svg";
 import { ReactComponent as ForwardArrow } from "../../Assets/icons/ArrowToRight.svg";
 
-import PageTitle from "../../Components/PageTitle";
-import BookItem from "../../Components/BookItem";
-import FavBookCard from "../../Components/FavBookCard";
+import { FavBookCard, BookItem, PageTitle } from "../../Components";
 
 import {
   FavoritesBooksSelector,

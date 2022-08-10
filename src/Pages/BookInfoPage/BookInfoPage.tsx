@@ -5,16 +5,21 @@ import LottieLoader from "react-lottie-loader";
 import Slider from "react-slick";
 
 import { scrollToTop } from "../../Utils";
+import { useAuth } from "../../hooks";
 
 import { ReactComponent as BackButton } from "../../Assets/icons/BackArrow.svg";
 import { ReactComponent as BackArrow } from "../../Assets/icons/ArrowToLeft.svg";
 import { ReactComponent as ForwardArrow } from "../../Assets/icons/ArrowToRight.svg";
 
-import Subscribe from "../../Components/Subscribe";
-import BookInfoCard from "../../Components/BookInfoCard";
-import InfoSwitcher from "../../Components/InfoSwitcher";
-import PageTitle from "../../Components/PageTitle";
 import loader from "../../Assets/lottieAnimation.json";
+
+import {
+  InfoSwitcher,
+  Subscribe,
+  BookInfoCard,
+  PageTitle,
+  ModalWindow,
+} from "../../Components";
 
 import {
   getBookInfo,
@@ -34,8 +39,13 @@ import BookItem from "../../Components/BookItem";
 import style from "./bookInfoPage.module.sass";
 
 const BookInfoPage: FC = () => {
+  const { isAuth } = useAuth();
   const bookLoading = useSelector(BookLoadingSelector.getNewBooksLoading);
   const [tabSelect, setTabSelect] = useState("description");
+
+  const [isShowModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const modalClose = () => setShowModal(false);
 
   const { isbn13 } = useParams();
   const dispatch = useDispatch();
@@ -57,9 +67,14 @@ const BookInfoPage: FC = () => {
   const isBookFav = !!favBooks.find((book) => book.isbn13 === BookInfo.isbn13);
 
   const addToFavHandler = () => {
-    isBookFav
-      ? dispatch(removeBookFromFav(BookInfo.isbn13))
-      : dispatch(setBookToFav(BookInfo));
+    if (isAuth) {
+      isBookFav
+        ? dispatch(removeBookFromFav(BookInfo.isbn13))
+        : dispatch(setBookToFav(BookInfo));
+    } else {
+      setModalMessage("You should sign in first!");
+      setShowModal(true);
+    }
   };
 
   const settings = {
@@ -142,6 +157,11 @@ const BookInfoPage: FC = () => {
           </div>
         </>
       )}
+      <ModalWindow
+        isShown={isShowModal}
+        modalText={modalMessage}
+        modalClose={modalClose}
+      />
     </div>
   );
 };

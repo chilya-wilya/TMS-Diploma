@@ -2,10 +2,9 @@ import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LottieLoader from "react-lottie-loader";
 
-import BookItem from "../../Components/BookItem";
-import PageTitle from "../../Components/PageTitle";
-import Pager from "../../Components/Pagination/Pager";
 import loader from "../../Assets/lottieAnimation.json";
+
+import { BookItem, Pagination, PageTitle } from "../../Components";
 
 import {
   SearchedBooksSelector,
@@ -58,7 +57,7 @@ const SearchPage: FC = () => {
         )}
       </div>
       {totalCount && limit && (
-        <Pager
+        <Pagination
           page={currentPage + 1}
           count={Math.ceil(+totalCount / +limit)}
           onChange={(page) => onPagerClick(page)}

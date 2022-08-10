@@ -9,12 +9,12 @@ import {
   NewBooksSelectors,
   NewBooksLoadingSelectors,
 } from "../../Redux/reducers/books";
-import BookItem from "../../Components/BookItem";
-import Subscribe from "../../Components/Subscribe";
+
+import { BookItem, Subscribe, PageTitle } from "../../Components";
+
 import loader from "../../Assets/lottieAnimation.json";
 
 import style from "./newReleases.module.sass";
-import PageTitle from "../../Components/PageTitle";
 
 const NewReleasesPage: FC = () => {
   const newBooksList = useSelector(NewBooksSelectors.getReleasedBooks);

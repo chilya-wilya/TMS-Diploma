@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
@@ -15,9 +15,7 @@ import { setUser } from "../../Redux/reducers/user";
 
 import { validateEmail } from "../../Utils";
 
-import Input from "../../Components/Input";
-import Button from "../../Components/Button";
-import InfoSwitcher from "../../Components/InfoSwitcher";
+import { InfoSwitcher, Input, Button, FormMessage } from "../../Components";
 
 import style from "./authPage.module.sass";
 
@@ -25,16 +23,30 @@ const AuthPage: FC = () => {
   const auth = getAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [emailSignIn, setEmailSignIn] = useState("");
   const [passwordSignIn, setPasswordSignIn] = useState("");
   const [nameSignUp, setNameSignUp] = useState("");
   const [emailSignUp, setEmailSignUp] = useState("");
   const [passwordSignUp, setPasswordSignUp] = useState("");
   const [passwordConfirmSignUp, setPasswordConfirmSignUp] = useState("");
+
+  const [messageType, setMessageType] = useState("");
+  const [isShowMessage, setShowMessage] = useState(false);
+  const [messageText, setMessageText] = useState("");
+
   const [tabSelect, setTabSelect] = useState("signIn");
 
   const signInHandler = () => {
-    if (validateEmail(emailSignIn) && passwordSignIn) {
+    if (!emailSignIn.length || !passwordSignIn.length) {
+      setMessageType("error");
+      setMessageText("You have to fill in all the fields!");
+      setShowMessage(true);
+    } else if (!validateEmail(emailSignIn)) {
+      setMessageType("error");
+      setMessageText("Enter the correct email!");
+      setShowMessage(true);
+    } else {
       signInWithEmailAndPassword(auth, emailSignIn, passwordSignIn)
         .then(({ user }) => {
           dispatch(
@@ -46,19 +58,32 @@ const AuthPage: FC = () => {
           );
           navigate(Pages.Books);
         })
-        .catch(console.error);
-      // console.log("Sign in!");
-      // console.log(user);
+        .catch(() => {
+          setMessageType("error");
+          setMessageText("User not found!");
+          setShowMessage(true);
+          // console.error;
+        });
     }
   };
   const signUpHandler = () => {
-    if (
-      emailSignUp &&
-      validateEmail(emailSignUp) &&
-      passwordSignUp &&
-      passwordSignUp === passwordConfirmSignUp &&
-      nameSignUp
-    ) {
+    if (!nameSignUp || !emailSignUp || !passwordSignUp) {
+      setMessageType("error");
+      setMessageText("You have to fill in all the fields!");
+      setShowMessage(true);
+    } else if (!validateEmail(emailSignUp)) {
+      setMessageType("error");
+      setMessageText("Enter the correct email!");
+      setShowMessage(true);
+    } else if (passwordSignUp.length <= 6) {
+      setMessageType("error");
+      setMessageText("The password has to be at least six characters long!");
+      setShowMessage(true);
+    } else if (passwordSignUp !== passwordConfirmSignUp) {
+      setMessageType("error");
+      setMessageText("Confirm your password!");
+      setShowMessage(true);
+    } else {
       createUserWithEmailAndPassword(auth, emailSignUp, passwordSignUp)
         .then((result) =>
           updateProfile(result.user, {
@@ -70,10 +95,14 @@ const AuthPage: FC = () => {
       // console.log(user);
       dispatch(setUser({ email: emailSignUp, name: nameSignUp }));
       navigate(Pages.Books);
-    } else {
-      console.log("Enter the correct data!");
     }
   };
+
+  useEffect(() => {
+    setMessageType("");
+    setMessageText("");
+    setShowMessage(false);
+  }, [tabSelect]);
 
   return (
     <div className="wrapper" style={{ height: "680px" }}>
@@ -114,6 +143,15 @@ const AuthPage: FC = () => {
               <div className={style.link} onClick={() => navigate(Pages.Reset)}>
                 Forgot password?
               </div>
+              {isShowMessage && (
+                <div style={{ marginBottom: "15px" }}>
+                  <FormMessage
+                    messageType={messageType}
+                    messageText={messageText}
+                    navLink={Pages.Login}
+                  />
+                </div>
+              )}
               <Button text={"Sign in"} type={"black"} onClick={signInHandler} />
             </div>
           ) : (
@@ -164,6 +202,15 @@ const AuthPage: FC = () => {
                     placeholder="Confirm your password"
                   />
                 </div>
+                {isShowMessage && (
+                  <div style={{ marginTop: "15px" }}>
+                    <FormMessage
+                      messageType={messageType}
+                      messageText={messageText}
+                      navLink={Pages.Login}
+                    />
+                  </div>
+                )}
                 <div className={style.btn}>
                   <Button
                     text={"Sign up"}

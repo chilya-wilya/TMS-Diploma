@@ -14,10 +14,7 @@ import { changePassword } from "../../Redux/reducers/user";
 
 import { Pages } from "../Router/Router";
 
-import Input from "../../Components/Input";
-import Button from "../../Components/Button";
-import PageTitle from "../../Components/PageTitle";
-import FormMessage from "../../Components/FormMessage/FormMessage";
+import { Input, Button, PageTitle, FormMessage } from "../../Components";
 
 import style from "./resetPage.module.sass";
 

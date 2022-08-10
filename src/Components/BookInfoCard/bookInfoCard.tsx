@@ -10,6 +10,8 @@ import Button from "../Button";
 import IconButton from "../IconButton";
 import ModalWindow from "../ModalWindow";
 
+import { useAuth } from "../../hooks";
+
 import {
   setBookToCart,
   BookSelector,
@@ -35,6 +37,7 @@ const BookInfoCard: FC<BookInfoCardProps> = ({
   addToFav,
   favIconType,
 }) => {
+  const { isAuth } = useAuth();
   const dispatch = useDispatch();
 
   const currentBook = useSelector(BookSelector.getBookInfo);
@@ -50,7 +53,10 @@ const BookInfoCard: FC<BookInfoCardProps> = ({
   const modalClose = () => setShowModal(false);
 
   const onAddToCart = () => {
-    if (isBookInCart) {
+    if (!isAuth) {
+      setModalMessage("You should sign in first!");
+      setShowModal(true);
+    } else if (isBookInCart) {
       setModalMessage("Book is already in your cart!");
       setShowModal(true);
     } else {

@@ -16,10 +16,8 @@ import { Pages } from "../Router/Router";
 
 import { validateEmail } from "../../Utils";
 
-import PageTitle from "../../Components/PageTitle";
-import Input from "../../Components/Input";
-import Button from "../../Components/Button";
-import FormMessage from "../../Components/FormMessage/FormMessage";
+import { PageTitle, Input, Button, FormMessage } from "../../Components";
+
 import { ReactComponent as BackButton } from "../../Assets/icons/BackArrow.svg";
 
 import {
@@ -106,7 +104,7 @@ const AccountPage: FC = () => {
       setMessageType("error");
       setMessageText("Enter the valid email!");
       setShowMessage(true);
-    } else if (newPassword.length <= 6) {
+    } else if (newPassword && newPassword.length <= 6) {
       setMessageType("error");
       setMessageText("The password has to be at least six characters long!");
       setShowMessage(true);
