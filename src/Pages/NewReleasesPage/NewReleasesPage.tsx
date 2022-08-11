@@ -31,7 +31,6 @@ const NewReleasesPage: FC = () => {
       {booksLoading ? (
         <LottieLoader animationData={loader} className={style.loader} />
       ) : (
-        // <LottieLoader animationData={loader} className={style.loader} />
         <>
           <PageTitle text="New Releases Books" size="big" />
           <div className={style.booksWrapper}>

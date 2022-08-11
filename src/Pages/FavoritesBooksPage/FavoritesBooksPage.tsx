@@ -1,13 +1,14 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 
-import { ReactComponent as BackButton } from "../../Assets/icons/BackArrow.svg";
 import { ReactComponent as BackArrow } from "../../Assets/icons/ArrowToLeft.svg";
 import { ReactComponent as ForwardArrow } from "../../Assets/icons/ArrowToRight.svg";
 
-import { FavBookCard, BookItem, PageTitle } from "../../Components";
+import { FavBookCard, BookItem, PageTitle, IconButton } from "../../Components";
+
+import { IconButtonTypes } from "../../Types";
 
 import {
   FavoritesBooksSelector,
@@ -34,8 +35,11 @@ const FavoritesBooksPage: FC = () => {
   return (
     <div className="wrapper">
       <div className={style.favWrapper}>
-        <div className={style.back} onClick={() => navigate(-1)}>
-          <BackButton />
+        <div className={style.back}>
+          <IconButton
+            type={IconButtonTypes.BackArrow}
+            onClick={() => navigate(-1)}
+          />
         </div>
         <div className={style.title}>
           <PageTitle text="Favorites" size="big" />

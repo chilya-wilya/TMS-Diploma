@@ -12,13 +12,19 @@ import {
   EmailAuthProvider,
 } from "firebase/auth";
 
+import { IconButtonTypes } from "../../Types";
+
 import { Pages } from "../Router/Router";
 
 import { validateEmail } from "../../Utils";
 
-import { PageTitle, Input, Button, FormMessage } from "../../Components";
-
-import { ReactComponent as BackButton } from "../../Assets/icons/BackArrow.svg";
+import {
+  PageTitle,
+  Input,
+  Button,
+  FormMessage,
+  IconButton,
+} from "../../Components";
 
 import {
   userSelector,
@@ -98,12 +104,9 @@ const AccountPage: FC = () => {
     }
   };
   const isDisabled = !newName && !newEmail && !newPassword;
-  console.log(isDisabled);
 
   const saveChangesHandler = () => {
-    if (!newName && !newEmail && !newPassword) {
-      return;
-    } else if (newEmail && !validateEmail(newEmail)) {
+    if (newEmail && !validateEmail(newEmail)) {
       setMessageType("error");
       setMessageText("Enter the valid email!");
       setShowMessage(true);
@@ -128,7 +131,10 @@ const AccountPage: FC = () => {
     <div className="wrapper">
       <div className={styles.accountWrapper}>
         <div className={styles.back}>
-          <BackButton onClick={() => navigate(-1)} />
+          <IconButton
+            type={IconButtonTypes.BackArrow}
+            onClick={() => navigate(-1)}
+          />
         </div>
         <PageTitle text="Account" size="big" />
         <div className={styles.subtitle}>

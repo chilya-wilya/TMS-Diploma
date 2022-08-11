@@ -2,9 +2,14 @@ import { FC, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { ReactComponent as BackButton } from "../../Assets/icons/BackArrow.svg";
+import { IconButtonTypes } from "../../Types";
 
-import { CartBookCard, CartSumChecker, PageTitle } from "../../Components";
+import {
+  CartBookCard,
+  CartSumChecker,
+  PageTitle,
+  IconButton,
+} from "../../Components";
 
 import { CartBooksSelector } from "../../Redux/reducers/books";
 
@@ -24,8 +29,11 @@ const FavoritesBooksPage: FC = () => {
   return (
     <div className="wrapper">
       <div className={style.cartWrapper}>
-        <div className={style.back} onClick={() => navigate(-1)}>
-          <BackButton />
+        <div className={style.back}>
+          <IconButton
+            type={IconButtonTypes.BackArrow}
+            onClick={() => navigate(-1)}
+          />
         </div>
         <div className={style.title}>
           <PageTitle text="Your cart" size="big" />

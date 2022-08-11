@@ -1,15 +1,11 @@
-import React, { FC, useState } from "react";
+import { FC } from "react";
+
+import { BookCounterProps } from "../../Types";
 
 import { ReactComponent as Plus } from "../../Assets/icons/Plus.svg";
 import { ReactComponent as Minus } from "../../Assets/icons/Minus.svg";
 
 import style from "./index.module.sass";
-
-type BookCounterProps = {
-  count: number;
-  onClickMinus: () => void;
-  onClickPlus: () => void;
-};
 
 const BookCounter: FC<BookCounterProps> = ({
   count,

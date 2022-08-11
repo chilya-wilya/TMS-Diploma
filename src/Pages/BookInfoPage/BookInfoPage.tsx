@@ -6,8 +6,8 @@ import Slider from "react-slick";
 
 import { scrollToTop } from "../../Utils";
 import { useAuth } from "../../hooks";
+import { IconButtonTypes } from "../../Types";
 
-import { ReactComponent as BackButton } from "../../Assets/icons/BackArrow.svg";
 import { ReactComponent as BackArrow } from "../../Assets/icons/ArrowToLeft.svg";
 import { ReactComponent as ForwardArrow } from "../../Assets/icons/ArrowToRight.svg";
 
@@ -19,6 +19,7 @@ import {
   BookInfoCard,
   PageTitle,
   ModalWindow,
+  IconButton,
 } from "../../Components";
 
 import {
@@ -88,14 +89,16 @@ const BookInfoPage: FC = () => {
 
   return (
     <div className="wrapper">
-      {/* <LottieLoader animationData={loader} /> */}
       {bookLoading ? (
         <LottieLoader animationData={loader} />
       ) : (
         <>
           <div className={style.bookWrapper}>
-            <div className={style.back} onClick={() => navigate(-1)}>
-              <BackButton />
+            <div className={style.back}>
+              <IconButton
+                type={IconButtonTypes.BackArrow}
+                onClick={() => navigate(-1)}
+              />
             </div>
             <BookInfoCard
               title={BookInfo.title}
@@ -111,7 +114,9 @@ const BookInfoPage: FC = () => {
               isbn13={BookInfo.isbn13}
               url={BookInfo.url}
               addToFav={addToFavHandler}
-              favIconType={isBookFav ? "fav" : "addFav"}
+              favIconType={
+                isBookFav ? IconButtonTypes.Fav : IconButtonTypes.AddToFav
+              }
             />
           </div>
           <div className={style.switcher}>

@@ -42,7 +42,33 @@ export type BookInfoCardProps = {
   isbn13?: string;
   url?: string;
   addToFav: () => void;
-  favIconType: string;
+  favIconType: IconButtonTypes.Fav | IconButtonTypes.AddToFav;
+};
+
+export enum IconButtonTypes {
+  AddToFav = "addFav",
+  Fav = "fav",
+  Cancel = "cancel",
+  LeftArrow = "left",
+  RightArrow = "right",
+  Minus = "minus",
+  Plus = "plus",
+  Cart = "cart",
+  FavPage = "favpage",
+  Account = "account",
+  BackArrow = "back",
+}
+
+export type IconButtonProps = {
+  onClick?: () => void;
+  type: IconButtonTypes;
+  color?: "black" | "white";
+};
+
+export type BookCounterProps = {
+  count: number;
+  onClickMinus: () => void;
+  onClickPlus: () => void;
 };
 
 export type PageTitleProps = {
@@ -67,6 +93,19 @@ export type InputProps = {
   value?: string;
   autocomplete?: "off" | "on";
   initialValue?: any; //password contains any symbols
+};
+
+export type ModalProps = {
+  modalText: string;
+  isShown: boolean;
+  modalClose: () => void;
+};
+
+export type InfoListProps = {
+  authors: string;
+  publisher: string;
+  year: string;
+  pages: string;
 };
 
 export type FormMessageProps = {

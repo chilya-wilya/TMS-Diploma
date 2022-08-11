@@ -1,13 +1,8 @@
-import React, { FC } from "react";
+import { FC } from "react";
+
+import { InfoListProps } from "../../Types";
 
 import style from "./infoList.module.sass";
-
-type InfoListProps = {
-  authors: string;
-  publisher: string;
-  year: string;
-  pages: string;
-};
 
 const InfoList: FC<InfoListProps> = ({ authors, publisher, year, pages }) => {
   return (

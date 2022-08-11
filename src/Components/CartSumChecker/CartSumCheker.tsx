@@ -1,6 +1,5 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import classNames from "classnames";
 
 import { CartSumCheckerProps } from "../../Types";
 
@@ -23,7 +22,7 @@ const CartSumChecker: FC<CartSumCheckerProps> = ({ price }) => {
   const [modalMessage, setModalMessage] = useState("");
   const modalClose = () => setShowModal(false);
 
-  const bookPrice = price;
+  const bookPrice = +price.toFixed(2);
   const Vat = +(bookPrice * 0.19).toFixed(2);
   const totalPrice = (bookPrice + Vat).toFixed(2);
 

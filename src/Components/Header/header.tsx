@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
+import { IconButtonTypes } from "../../Types";
+
 import { Pages } from "../../Pages/Router/Router";
 
 import Button from "../Button";
@@ -94,21 +96,21 @@ const Header: FC = () => {
                 [style.linkActive]: isFavPage === true,
               })}
             >
-              <IconButton onClick={navToFav} type="favpage" />
+              <IconButton onClick={navToFav} type={IconButtonTypes.FavPage} />
             </div>
             <div
               className={classNames(style.link, {
                 [style.linkActive]: isCartPage === true,
               })}
             >
-              <IconButton onClick={navToCart} type="cart" />
+              <IconButton onClick={navToCart} type={IconButtonTypes.Cart} />
             </div>
             <div
               className={classNames(style.link, {
                 [style.linkActive]: isAccPage === true,
               })}
             >
-              <IconButton onClick={navToAcc} type="account" />
+              <IconButton onClick={navToAcc} type={IconButtonTypes.Account} />
             </div>
           </div>
         ) : (

@@ -66,7 +66,7 @@ const CartBookCard: FC<CartBookItemProps> = ({
         </div>
       </div>
       <div className={style.price}>
-        <BookPrice price={`$ ${+price.substring(1) * count}`} />
+        <BookPrice price={`$ ${(+price.substring(1) * count).toFixed(2)}`} />
       </div>
       <div className={style.delete}>
         <Delete onClick={onDelete} />

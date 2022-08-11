@@ -1,15 +1,11 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import classNames from "classnames";
+
+import { ModalProps, IconButtonTypes } from "../../Types";
 
 import IconButton from "../IconButton";
 
 import style from "./modalWindow.module.sass";
-
-type ModalProps = {
-  modalText: string;
-  isShown: boolean;
-  modalClose: () => void;
-};
 
 const ModalWindow: FC<ModalProps> = ({ modalText, isShown, modalClose }) => {
   return (
@@ -21,7 +17,11 @@ const ModalWindow: FC<ModalProps> = ({ modalText, isShown, modalClose }) => {
       <div className={style.modalContent}>
         <p>{modalText}</p>
         <span className={style.close}>
-          <IconButton type="cancel" color="white" onClick={modalClose} />
+          <IconButton
+            type={IconButtonTypes.Cancel}
+            color="white"
+            onClick={modalClose}
+          />
         </span>
       </div>
     </div>

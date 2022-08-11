@@ -1,5 +1,7 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import classNames from "classnames";
+
+import { IconButtonProps } from "../../Types";
 
 import { ReactComponent as AddToFav } from "../../Assets/icons/addToFav.svg";
 import { ReactComponent as Fav } from "../../Assets/icons/Fav.svg";
@@ -11,14 +13,9 @@ import { ReactComponent as Plus } from "../../Assets/icons/Plus.svg";
 import { ReactComponent as FavPage } from "../../Assets/icons/favPage.svg";
 import { ReactComponent as Cart } from "../../Assets/icons/Cart.svg";
 import { ReactComponent as Account } from "../../Assets/icons/Account.svg";
+import { ReactComponent as BackArrow } from "../../Assets/icons/BackArrow.svg";
 
 import style from "./iconButton.module.sass";
-
-type IconButtonProps = {
-  onClick: () => void;
-  type: string;
-  color?: "black" | "white";
-};
 
 const IconButton: FC<IconButtonProps> = ({ onClick, type, color }) => {
   let buttonIcon;
@@ -42,14 +39,16 @@ const IconButton: FC<IconButtonProps> = ({ onClick, type, color }) => {
     buttonIcon = <FavPage />;
   } else if (type === "account") {
     buttonIcon = <Account />;
+  } else if (type === "back") {
+    buttonIcon = <BackArrow />;
   }
   return (
     <button
-      className={classNames(
-        style.iconButton,
-        { [style.black]: color === "black" },
-        { [style.white]: color === "white" }
-      )}
+      className={classNames(style.iconButton, {
+        [style.black]: color === "black",
+        [style.white]: color === "white",
+        [style.withDimension]: type !== "back",
+      })}
       onClick={onClick}
     >
       {buttonIcon}

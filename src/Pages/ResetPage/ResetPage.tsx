@@ -1,7 +1,5 @@
 import { FC, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import classNames from "classnames";
+import { useDispatch } from "react-redux";
 
 import {
   getAuth,
@@ -24,7 +22,6 @@ const ResetPage: FC = () => {
   const userEmail = user?.email;
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [messageType, setMessageType] = useState("");
@@ -49,6 +46,8 @@ const ResetPage: FC = () => {
         });
     }
   };
+
+  const isDisabled = !password || !passwordConfirm;
 
   const onClick = () => {
     if (password && password.length >= 6 && password === passwordConfirm) {
@@ -102,7 +101,12 @@ const ResetPage: FC = () => {
           />
         )}
         <div className={style.btn}>
-          <Button text={"Set password"} type={"black"} onClick={onClick} />
+          <Button
+            text={"Set password"}
+            type={"black"}
+            onClick={onClick}
+            disabled={isDisabled}
+          />
         </div>
       </div>
     </div>
