@@ -17,17 +17,20 @@ const BookItem: FC<BookItemProps> = ({
   price,
   isbn13,
 }) => {
+  const navigateToBook = () => navigate(`/books/${isbn13}`);
   const navigate = useNavigate();
   return (
     <div className={classNames(style.item, "wrapper")}>
       <div className={style.bookCover}>
-        <img src={image} alt="book cover" />
+        <img
+          src={image}
+          alt="book cover"
+          onClick={navigateToBook}
+          style={{ cursor: "pointer" }}
+        />
       </div>
       <div className={style.bookInfo}>
-        <div
-          className={style.title}
-          onClick={() => navigate(`/books/${isbn13}`)}
-        >
+        <div className={style.title} onClick={navigateToBook}>
           <PageTitle text={title} size="small" />
         </div>
         <div className={style.subtitle}>
