@@ -5,9 +5,12 @@ import classNames from "classnames";
 
 import { Pages } from "../../Pages/Router/Router";
 
+import Button from "../Button";
 import IconButton from "../IconButton";
 import Input from "../Input";
 import { ReactComponent as Logo } from "../../Assets/icons/logo.svg";
+
+import { useAuth } from "../../hooks";
 
 import {
   getSearchedBooks,
@@ -19,6 +22,7 @@ import {
 import style from "./header.module.sass";
 
 const Header: FC = () => {
+  const { isAuth } = useAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -83,29 +87,40 @@ const Header: FC = () => {
             initialValue={searchStr}
           />
         </div>
-        <div className={style.navLinks}>
-          <div
-            className={classNames(style.link, {
-              [style.linkActive]: isFavPage === true,
-            })}
-          >
-            <IconButton onClick={navToFav} type="favpage" />
+        {isAuth ? (
+          <div className={style.navLinks}>
+            <div
+              className={classNames(style.link, {
+                [style.linkActive]: isFavPage === true,
+              })}
+            >
+              <IconButton onClick={navToFav} type="favpage" />
+            </div>
+            <div
+              className={classNames(style.link, {
+                [style.linkActive]: isCartPage === true,
+              })}
+            >
+              <IconButton onClick={navToCart} type="cart" />
+            </div>
+            <div
+              className={classNames(style.link, {
+                [style.linkActive]: isAccPage === true,
+              })}
+            >
+              <IconButton onClick={navToAcc} type="account" />
+            </div>
           </div>
-          <div
-            className={classNames(style.link, {
-              [style.linkActive]: isCartPage === true,
-            })}
-          >
-            <IconButton onClick={navToCart} type="cart" />
-          </div>
-          <div
-            className={classNames(style.link, {
-              [style.linkActive]: isAccPage === true,
-            })}
-          >
-            <IconButton onClick={navToAcc} type="account" />
-          </div>
-        </div>
+        ) : (
+          <Button
+            text={"Sign in"}
+            onClick={() => {
+              navigate(Pages.Login);
+            }}
+            type="black"
+            width={"200px"}
+          />
+        )}
       </div>
     </div>
   );

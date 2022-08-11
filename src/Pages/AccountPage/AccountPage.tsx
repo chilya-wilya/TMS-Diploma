@@ -97,6 +97,9 @@ const AccountPage: FC = () => {
         });
     }
   };
+  const isDisabled = !newName && !newEmail && !newPassword;
+  console.log(isDisabled);
+
   const saveChangesHandler = () => {
     if (!newName && !newEmail && !newPassword) {
       return;
@@ -200,7 +203,12 @@ const AccountPage: FC = () => {
         )}
       </div>
       <div className={classNames(styles.buttons)}>
-        <Button text="Save changes" onClick={saveChangesHandler} type="black" />
+        <Button
+          text="Save changes"
+          onClick={saveChangesHandler}
+          type="black"
+          disabled={isDisabled}
+        />
         <Button
           text="Cancel"
           onClick={() => {

@@ -1,4 +1,5 @@
 import { Pages } from "../Pages/Router/Router";
+import { FC } from "react";
 
 export type BookItemProps = {
   title: string;
@@ -47,6 +48,15 @@ export type BookInfoCardProps = {
 export type PageTitleProps = {
   text: string;
   size: "big" | "small" | "medium";
+};
+
+export type ButtonProps = {
+  text: string | number;
+  onClick: () => void;
+  type: "black" | "white";
+  icon?: FC;
+  disabled?: boolean;
+  width?: string;
 };
 
 export type InputProps = {

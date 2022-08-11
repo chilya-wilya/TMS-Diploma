@@ -1,17 +1,11 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import classNames from "classnames";
+
+import { ButtonProps } from "../../Types";
 
 import style from "./button.module.sass";
 
-type ButtonProps = {
-  text: string | number;
-  onClick: () => void;
-  type: string;
-  icon?: FC;
-  disabled?: true | false;
-};
-
-const Button: FC<ButtonProps> = ({ text, onClick, type, disabled }) => {
+const Button: FC<ButtonProps> = ({ text, onClick, type, disabled, width }) => {
   return (
     <button
       className={classNames(
@@ -21,6 +15,8 @@ const Button: FC<ButtonProps> = ({ text, onClick, type, disabled }) => {
         { [style.disabled]: disabled }
       )}
       onClick={onClick}
+      style={width ? { width } : { width: "100%" }}
+      disabled={disabled}
     >
       {text}
     </button>

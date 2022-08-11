@@ -37,12 +37,12 @@ const AuthPage: FC = () => {
 
   const [tabSelect, setTabSelect] = useState("signIn");
 
+  const isDisabledSignIn = !emailSignIn || !passwordSignIn;
+  // prettier-ignore
+  const isDisabledSignUp = !nameSignUp || !emailSignUp || !passwordSignUp || !passwordConfirmSignUp;
+
   const signInHandler = () => {
-    if (!emailSignIn.length || !passwordSignIn.length) {
-      setMessageType("error");
-      setMessageText("You have to fill in all the fields!");
-      setShowMessage(true);
-    } else if (!validateEmail(emailSignIn)) {
+    if (!validateEmail(emailSignIn)) {
       setMessageType("error");
       setMessageText("Enter the correct email!");
       setShowMessage(true);
@@ -67,11 +67,7 @@ const AuthPage: FC = () => {
     }
   };
   const signUpHandler = () => {
-    if (!nameSignUp || !emailSignUp || !passwordSignUp) {
-      setMessageType("error");
-      setMessageText("You have to fill in all the fields!");
-      setShowMessage(true);
-    } else if (!validateEmail(emailSignUp)) {
+    if (!validateEmail(emailSignUp)) {
       setMessageType("error");
       setMessageText("Enter the correct email!");
       setShowMessage(true);
@@ -152,7 +148,12 @@ const AuthPage: FC = () => {
                   />
                 </div>
               )}
-              <Button text={"Sign in"} type={"black"} onClick={signInHandler} />
+              <Button
+                text={"Sign in"}
+                type={"black"}
+                onClick={signInHandler}
+                disabled={isDisabledSignIn}
+              />
             </div>
           ) : (
             <div className={classNames(style.signUpWrapper)}>
@@ -168,7 +169,6 @@ const AuthPage: FC = () => {
                     placeholder="Your name"
                   />
                 </div>
-
                 <p className={style.value}>Email</p>
                 <div className={style.input}>
                   {" "}
@@ -180,7 +180,6 @@ const AuthPage: FC = () => {
                     placeholder="Your email"
                   />
                 </div>
-
                 <p className={style.value}>Password</p>
                 <div className={style.input}>
                   <Input
@@ -191,7 +190,6 @@ const AuthPage: FC = () => {
                     placeholder="Your password"
                   />
                 </div>
-
                 <p className={style.value}>Confirm password</p>
                 <div className={style.input}>
                   <Input
@@ -216,6 +214,7 @@ const AuthPage: FC = () => {
                     text={"Sign up"}
                     type={"black"}
                     onClick={signUpHandler}
+                    disabled={isDisabledSignUp}
                   />
                 </div>
               </div>
