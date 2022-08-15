@@ -11,12 +11,10 @@ const FormMessage: FC<FormMessageProps> = ({
   messageType,
   navLink,
   linkText,
-  width,
 }) => {
   const navigate = useNavigate();
   return (
     <div
-      style={width ?? { width: "100%" }}
       className={classNames(style.msg, {
         [style.errorMsg]: messageType === "error",
         [style.okMsg]: messageType === "OK",

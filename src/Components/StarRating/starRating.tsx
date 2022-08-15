@@ -1,17 +1,13 @@
-import React, { useState, FC } from "react";
+import { useState, FC } from "react";
 import { Rating } from "react-simple-star-rating";
 
-type StarRatingProps = {
-  initialValue: number;
-};
+import { StarRatingProps } from "../../Types";
 
 const StarRating: FC<StarRatingProps> = ({ initialValue }) => {
   const [rating, setRating] = useState(0);
 
-  // Catch Rating value
   const handleRating = (rate: number) => {
     setRating(rate);
-    // other logic
   };
 
   return (

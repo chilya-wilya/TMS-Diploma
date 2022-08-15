@@ -38,7 +38,7 @@ export type BookInfoCardProps = {
   desc: string;
   price: string;
   image: string;
-  pdf?: any;
+  pdf?: string[];
   isbn13?: string;
   url?: string;
   addToFav: () => void;
@@ -113,7 +113,6 @@ export type FormMessageProps = {
   messageType: string;
   navLink?: Pages;
   linkText?: string;
-  width?: any;
 };
 
 export type TabSwitcherProps = {
@@ -132,6 +131,10 @@ export type SearchedBooksType = {
 export type PriceProps = {
   price: string | number;
   size?: string;
+};
+
+export type StarRatingProps = {
+  initialValue: number;
 };
 
 export type PagerPropsType = {
